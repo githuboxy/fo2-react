@@ -1,4 +1,4 @@
-import { alertConstants } from '../_constants';
+import { alertConstants } from '../../rootindex/constants';
 
 export function alert(state = {}, action) {
   switch (action.type) {
