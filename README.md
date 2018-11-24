@@ -6,9 +6,9 @@ Make sure you have latest NodeJs installed on
 https://nodejs.org/en/download/
 
 
-**For development mode make sure you clone**
+**For development mode make sure you clone fo2 fake Server.  **
 ```
-Step-1 : git clone https://github.com/githuboxy/fo2-fake-server.git \n
+Step-1 : git clone https://github.com/githuboxy/fo2-fake-server.git 
 Step-2 : cd fo2-fake-server
 Step-3 : npm install
 Step-4 : npm start
@@ -34,7 +34,7 @@ Step-4 : npm start
    |---constants
    |---pages
    |---reducers
-   |-rootindex  .....  root index will glue all components
+   |-rootindex  .....  root index will glue all components together
    |-user       .....  module 
    |---actions
    |---components
