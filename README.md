@@ -6,7 +6,7 @@ Make sure you have latest NodeJs installed on
 https://nodejs.org/en/download/
 
 
-**For development mode make sure you clone fo2 fake Server.  **
+**For development mode make sure you clone fo2 fake Server**
 ```
 Step-1 : git clone https://github.com/githuboxy/fo2-fake-server.git 
 Step-2 : cd fo2-fake-server
