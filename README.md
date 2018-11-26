@@ -17,7 +17,7 @@ Step-4 : npm start
 **Once fake server is up and running**
 ```
 Step-1 : git clone https://github.com/githuboxy/fo2-react.git
-Step-2 : cd fo2-fake-server
+Step-2 : cd fo2-react
 Step-3 : npm install
 Step-4 : npm start
 ```
