@@ -1,0 +1,256 @@
+body{
+    margin: 0;
+    padding: 0;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif !important;
+    font-size: 12px;
+  }
+.dropdown:hover{
+ 	cursor: pointer;
+ }  
+ /* .ReactTable .rt-thead .rt-th.-cursor-pointer, .ReactTable .rt-thead .rt-td.-cursor-pointer{
+ 	background-color: #ccc;
+ 	border-top: 1px solid #333;
+ 	border-right: 1px solid #333;
+ 	border-bottom: 1px solid #333;
+ 	font-weight: bold;
+ }
+ .ReactTable{
+ 	border-right:1px solid #333 !important;
+ 	border-bottom: 1px solid #333 !important;
+ 	border-left: 1px solid #333 !important;
+ } */
+ .navbar.navbar-default{
+ 	background-color: #121212;
+ }
+ .mt{
+  margin-top: 10px;
+ }
+ .ReactTable .rt-resizable-header {
+    padding: 6px 24px !important;
+    -webkit-box-shadow: none !important;
+    box-shadow: none !important;
+}
+ 
+.ReactTable .rt-resizer:before {
+    display: inline-block;
+    position: absolute;
+    right: 25px;
+    top: 3px;
+    height: 18px;
+    width: 18px;
+    color: transparent;
+    content: '.';
+    background-size: 18px 18px;
+    background-repeat: no-repeat; 
+    opacity: 0.87;
+}
+
+.ReactTable  .rt-resizable-header-content:after {
+    position: absolute;
+    right: 8px;
+    top: 3px;
+    height: 18px;
+    width: 18px;
+    z-index: 120;
+    color: transparent;
+    content: '.';
+}
+
+.ReactTable .rt-th.-sort-asc .rt-resizer:before {
+    background-image: url("/img/down.png") !important;
+}
+
+.ReactTable .rt-th.-sort-desc .rt-resizer:before {
+    background-image: url("/img/up.png") !important;
+}
+ 
+.navbar-default .navbar-nav>li>a:hover{
+  background-color: #ccc;
+}
+
+.wrap
+{
+    width: 100%;
+    height: 100%;
+    min-height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 99;
+}
+
+p.form-title
+{
+    font-family: 'Open Sans' , sans-serif;
+    font-size: 20px;
+    font-weight: 600;
+    text-align: center;
+    color: rgb(56, 3, 3);
+    margin-top: 5%;
+    text-transform: uppercase;
+    letter-spacing: 4px;
+}
+
+form
+{
+    width: 250px;
+    margin: 0 auto;
+}
+
+form.login input[type="text"], form.login input[type="password"]
+{
+    width: 100%;
+    margin: 0;
+    padding: 5px 10px;
+    background: 0;
+    border: 0;
+    border-bottom: 1px solid rgb(36, 1, 1);
+    outline: 0;
+    font-style: italic;
+    font-size: 12px;
+    font-weight: 400;
+    letter-spacing: 1px;
+    margin-bottom: 5px;
+    color: rgb(46, 2, 2);
+    outline: 0;
+}
+
+form.login input[type="submit"]
+{
+    width: 100%;
+    font-size: 14px;
+    text-transform: uppercase;
+    font-weight: 500;
+    margin-top: 16px;
+    outline: 0;
+    cursor: pointer;
+    letter-spacing: 1px;
+}
+
+form.login input[type="submit"]:hover
+{
+    transition: background-color 0.5s ease;
+}
+
+form.login .remember-forgot
+{
+    float: left;
+    width: 100%;
+    margin: 10px 0 0 0;
+}
+form.login .forgot-pass-content
+{
+    min-height: 20px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+form.login label, form.login a
+{
+    font-size: 12px;
+    font-weight: 400;
+    color: rgb(53, 3, 3);
+}
+
+form.login a
+{
+    transition: color 0.5s ease;
+}
+
+form.login a:hover
+{
+    color: #2ecc71;
+}
+
+.pr-wrap
+{
+    width: 100%;
+    height: 100%;
+    min-height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 999;
+    display: none;
+}
+
+.show-pass-reset
+{
+    display: block !important;
+}
+
+.pass-reset
+{
+    margin: 0 auto;
+    width: 250px;
+    position: relative;
+    margin-top: 22%;
+    z-index: 999;
+    background: rgb(53, 3, 3);
+    padding: 20px 15px;
+}
+
+.pass-reset label
+{
+    font-size: 12px;
+    font-weight: 400;
+    margin-bottom: 15px;
+}
+
+.pass-reset input[type="email"]
+{
+    width: 100%;
+    margin: 5px 0 0 0;
+    padding: 5px 10px;
+    background: 0;
+    border: 0;
+    border-bottom: 1px solid #000000;
+    outline: 0;
+    font-style: italic;
+    font-size: 12px;
+    font-weight: 400;
+    letter-spacing: 1px;
+    margin-bottom: 5px;
+    color: #000000;
+    outline: 0;
+}
+
+.pass-reset input[type="submit"]
+{
+    width: 100%;
+    border: 0;
+    font-size: 14px;
+    text-transform: uppercase;
+    font-weight: 500;
+    margin-top: 10px;
+    outline: 0;
+    cursor: pointer;
+    letter-spacing: 1px;
+}
+
+.pass-reset input[type="submit"]:hover
+{
+    transition: background-color 0.5s ease;
+}
+.posted-by
+{
+    position: absolute;
+    bottom: 26px;
+    margin: 0 auto;
+    color: #FFF;
+    background-color: rgba(0, 0, 0, 0.66);
+    padding: 10px;
+    left: 45%;
+}
+
+::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+    color: rgb(12, 0, 0);
+    opacity: 1; /* Firefox */
+}
+
+:-ms-input-placeholder { /* Internet Explorer 10-11 */
+    color: rgb(12, 0, 0);
+}
+
+::-ms-input-placeholder { /* Microsoft Edge */
+    color: rgb(12, 0, 0);
+}
