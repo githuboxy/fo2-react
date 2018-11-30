@@ -1,7 +1,26 @@
 import React from 'react'; 
+import DatePicker from 'react-datepicker'; 
+import moment from 'moment';
+import 'react-datepicker/dist/react-datepicker.css'; 
+
 class Filters extends React.Component {
-    render(){
-         
+    constructor () { 
+        super() 
+        this.state = { 
+          startDate: moment(),
+          endDate: moment()
+        }; 
+        this.handleStartDateChange = this.handleStartDateChange.bind(this); 
+        this.handleEndDateChange = this.handleEndDateChange.bind(this); 
+        
+      } 
+      handleStartDateChange(date) {  
+         this.setState({startDate:date});
+      }
+      handleEndDateChange(date) {  
+        this.setState({endDate:date});
+     }
+    render(){ 
         const { data } = this.props;
         let filetermarkup;
          
@@ -20,10 +39,26 @@ class Filters extends React.Component {
                    </select>
                </div>
                );
-            }else if(filter.type === "button"){
+            }else if(filter.type === "datepicker"){
+                if(filter.name === "fromDate"){
+                 return (
+                   <div className="form-group col-md-2 col-sm-2" key={filter.id.toString()}>
+                       <label> { filter.label }:</label>
+                     <DatePicker dateFormat="MMM DD, YYYY" ref={ filter.name } name={filter.name} className="form-control"     onChange={this.handleStartDateChange} />
+                   </div>
+                 );
+                }else if(filter.name === "toDate"){
+                 return (
+                   <div className="form-group col-md-2 col-sm-2" key={filter.id.toString()}>
+                       <label> { filter.label }:</label>
+                     <DatePicker dateFormat="MMM DD, YYYY" ref={ filter.name } name={filter.name} className="form-control"    onChange={this.handleEndDateChange} />
+                   </div>
+                 );
+                }
+              }else if(filter.type === "button"){
                 return (
                  <div  className="form-group col-md-2 col-sm-2 mt" key={filter.id.toString()}>
-                      <a title="Go" onClick={(e)=>{this.doChange();}} className="btn btn-primary btn-xs">{ filter.name }</a> 
+                      <a title="Go" onClick={this.props.method} className="btn btn-primary btn-xs">{ filter.name }</a> 
                   </div>
                );
               }else if(filter.type === "input"){
