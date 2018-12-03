@@ -1,4 +1,5 @@
 import { authHeader,fetchHelper } from '../../_helpers';
+import { alertConstants } from '../../common/constants/alert.constants';
 
 export const navbarService = {
     fetchNavbar
@@ -6,6 +7,12 @@ export const navbarService = {
 
 
 function fetchNavbar() { 
-    let _navLinks = fetchHelper.httpGet('http://localhost:8081/navlinks');
+    var user = JSON.parse(localStorage.getItem('user'));
+    console.log("navbar token--->")
+    console.log(user[0].token);
+    var filtObj = {};
+        filtObj["token"] =user[0].token;
+
+    let _navLinks = fetchHelper.httpPost(alertConstants.URL+'/reactjs/reactJSUtil.jsp?actionFlag=TOPPANEL',filtObj);
     return _navLinks;
 }

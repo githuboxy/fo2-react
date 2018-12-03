@@ -22,11 +22,12 @@ function fetchReportData() {
     function failure(error) { return { type: reportConstants.GETREPORTDATA_FAILURE, error } }
 }
 
-function fetchReportTableData(){ 
+function fetchReportTableData(bodyFormData){ 
+    console.log("fetchReportTableData")
     return dispatch => {
         dispatch(request());
 
-        reportService.fetchReportTable()
+        reportService.fetchReportTable(bodyFormData)
             .then(
                 reportdatatable => dispatch(success(reportdatatable)),
                 error => dispatch(failure(error))

@@ -7,6 +7,7 @@ import Filters from './Filters';
 import ReactTable, { ReactTableDefaults } from "react-table";
 import '../../../node_modules/react-table/react-table.css';  
 import '../../user/css/App.css';
+import FormData from 'form-data';
 Object.assign(ReactTableDefaults, {
     defaultPageSize: 10,
     minRows: 1
@@ -20,17 +21,29 @@ class ReportTemplate extends React.Component {
         this.props.dispatch(reportActions.fetchReportData());
    }
 
-   doChange(e){
-        this.props.dispatch(reportActions.fetchReportTableData()); 
+   doChange(fillObj){
+        var bodyFormData = new FormData();
+        console.log("fillObj---->")
+        for (name in fillObj) {
+        console.log(name)
+        console.log(fillObj[name])
+        bodyFormData.set(name, fillObj[name]); 
+        }
+        
+        this.props.dispatch(reportActions.fetchReportTableData(bodyFormData)); 
         
    }
     render(){
         
         const { reportdata,reportdatatable } = this.props; 
         var results  = reportdatatable.reportdatatable;
+        if(results !== undefined)
+        results.map((item,index) => {
+            console.log(item)
+        })
+       
         var columns = [];
-        if(results !== undefined) {
-            console.log(results)
+        if(results !== undefined) { 
            results.map((item,index) => {
                 if(index === 0){
                     var s =  item;                     

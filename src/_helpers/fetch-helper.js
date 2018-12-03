@@ -1,5 +1,5 @@
 import { authHeader } from  './auth-header';
-
+import { alertConstants } from '../common/constants/alert.constants';
 
 
 export const fetchHelper = {
@@ -68,12 +68,14 @@ function handleResponse(response) {
 
 
 function login(username,password) {
-	return  fetchHelper.httpPost('http://localhost:8081/login', 
-	    	{ 'email':username, 'password':password}).then(user => {
-	        // login successful if there's a jwt token in the response
-	        if (user.token) {
+	return  fetchHelper.httpPost(alertConstants.URL+'/reactjs/reactJSUtil.jsp?actionFlag=VALIDATE_LOGIN', 
+	    	{ 'loginName':username, 'noOneKnows':password}).then(user => {
+			// login successful if there's a jwt token in the response
+		 
+	        if (user[0].token) {
 	            // store user details and jwt token in local storage to keep user logged in between page refreshes
-	            localStorage.setItem('user', JSON.stringify(user));
+				localStorage.setItem('user', JSON.stringify(user));
+			 
 	        }
 
 	        return user;

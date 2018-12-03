@@ -20,10 +20,33 @@ class Filters extends React.Component {
       handleEndDateChange(date) {  
         this.setState({endDate:date});
      }
+     doChange(e){
+      var filtObj = {};
+      console.log("temp1")
+      
+      for(var i =0; i<this.props.data.reportdata.length; i++){
+         var temp = this.props.data.reportdata[i].name; 
+         
+          if((this.props.data.reportdata[i].type !== "data") && (this.props.data.reportdata[i].type !== "datepicker") && (this.props.data.reportdata[i].type !== "Button") && (this.props.data.reportdata[i].type !== "newline")){
+            console.log(this.props.data.reportdata[i].type)
+            filtObj[this.props.data.reportdata[i].name] = this.refs[temp].value; 
+          }
+
+            if(this.props.data.reportdata[i].type === "datepicker"){ 
+              if(this.props.data.reportdata[i].name === "fromDate")
+                filtObj[this.props.data.reportdata[i].name] = "Nov 01, 2018";//this.state.startDate.format("MMM DD, YYYY");
+              if(this.props.data.reportdata[i].name === "toDate")
+                filtObj[this.props.data.reportdata[i].name] = "Dec 01, 2018";//this.state.endDate.format("MMM DD, YYYY");
+           }
+          }  
+      
+          
+          this.props.method(filtObj);
+     }
     render(){ 
         const { data } = this.props;
         let filetermarkup;
-         
+        
         if(data.reportdata !== undefined){            
         filetermarkup = data.reportdata.map((filter,index) => {
             if(filter.type === "Select"){
@@ -55,10 +78,10 @@ class Filters extends React.Component {
                    </div>
                  );
                 }
-              }else if(filter.type === "button"){
+              }else if(filter.type === "Button"){
                 return (
                  <div  className="form-group col-md-2 col-sm-2 mt" key={filter.id.toString()}>
-                      <a title="Go" onClick={this.props.method} className="btn btn-primary btn-xs">{ filter.name }</a> 
+                      <a title="Go" onClick={(e)=>{this.doChange();}} className="btn btn-primary btn-xs">{ filter.name }</a> 
                   </div>
                );
               }else if(filter.type === "input"){
