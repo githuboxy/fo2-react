@@ -1,10 +1,11 @@
 import { authHeader } from  './auth-header';
 import { alertConstants } from '../common/constants/alert.constants';
-
+import axios from 'axios'; 
 
 export const fetchHelper = {
 		httpGet,
 		httpPost,
+		httpFormPost,
 		httpPut,
 		httpDelete,
 		logout,
@@ -28,14 +29,31 @@ function httpPost(url,jsonBody,extraHeaders=null) {
 	   return fetch(url,requestOptions).then(handleResponse);
 }
 
+function httpFormPost(url,jsonBody,extraHeaders=null) {
+	const requestOptions = {
+		 method: 'POST',
+		 headers: { ...authHeader(),...extraHeaders,'Content-Type': 'application/x-www-form-urlencoded' },
+		 //body: "clientFirm=ALL&"//+jsonBody.get("clientFirm")
+		 body:JSON.stringify(jsonBody)
+	 };
+	 //return fetch(url,requestOptions).then(handleResponse);
+	return axios({
+		method: 'post',
+		url:url,
+		data: jsonBody,
+		config: { headers: {'Content-Type': 'multipart/form-data' }}
+		}).then(handleFormResponse);
+}
 
 function httpPut(url,jsonBody,extraHeaders=null) {
 	   const requestOptions = {
 	        method: 'PUT',
 	        headers: { ...authHeader(),...extraHeaders,'Content-Type': 'application/json' },
 	        body: JSON.stringify(jsonBody)
-	    };
-	   return fetch(url,requestOptions).then(handleResponse);
+		};
+		
+
+	  return fetch(url,requestOptions).then(handleResponse);
 }
 
 function httpDelete(url,extraHeaders=null) {
@@ -47,7 +65,7 @@ function httpDelete(url,extraHeaders=null) {
 	    return fetch(url,requestOptions).then(handleResponse);
 }
 
-function handleResponse(response) {
+function handleResponse(response) {  
   return response.text().then(text => {
       const data = text && JSON.parse(text);
       if (!response.ok) {
@@ -65,6 +83,9 @@ function handleResponse(response) {
   }); 
   
 }
+function handleFormResponse(response) { 
+		return response.data;
+  }
 
 
 function login(username,password) {
@@ -75,7 +96,6 @@ function login(username,password) {
 	        if (user[0].token) {
 	            // store user details and jwt token in local storage to keep user logged in between page refreshes
 				localStorage.setItem('user', JSON.stringify(user));
-			 
 	        }
 
 	        return user;

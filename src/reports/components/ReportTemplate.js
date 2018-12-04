@@ -9,7 +9,7 @@ import '../../../node_modules/react-table/react-table.css';
 import '../../user/css/App.css';
 import FormData from 'form-data';
 Object.assign(ReactTableDefaults, {
-    defaultPageSize: 10,
+    defaultPageSize: 5,
     minRows: 1
   });
 class ReportTemplate extends React.Component {
@@ -17,30 +17,43 @@ class ReportTemplate extends React.Component {
         super();
         this.doChange = this.doChange.bind(this);
     }
-    componentDidMount() {
-        this.props.dispatch(reportActions.fetchReportData());
+    componentDidMount() { 
+        this.getFilter()
    }
-
-   doChange(fillObj){
-        var bodyFormData = new FormData();
-        console.log("fillObj---->")
-        for (name in fillObj) {
-        console.log(name)
-        console.log(fillObj[name])
-        bodyFormData.set(name, fillObj[name]); 
-        }
+   getFilter(){
+    this.props.dispatch(reportActions.fetchReportData());
+     
+   }
+   shouldComponentUpdate(nextProps,nextState) {   
+        const update = this.props.reportdata !== nextProps.reportdata; 
         
+        if(!update)
+           this.getFilter()
+
+            return true;
+    }
+   doChange(fillObj){
+        var bodyFormData = new FormData(); 
+        for (name in fillObj) { 
+            bodyFormData.set(name, fillObj[name]); 
+        }
         this.props.dispatch(reportActions.fetchReportTableData(bodyFormData)); 
         
    }
     render(){
-        
+        var screenName = window.location.href;
+        screenName = screenName.substring(screenName.length,screenName.length-7)
+         
+
         const { reportdata,reportdatatable } = this.props; 
-        var results  = reportdatatable.reportdatatable;
-        if(results !== undefined)
-        results.map((item,index) => {
-            console.log(item)
-        })
+        var results1  = reportdatatable.reportdatatable;
+        var results;
+
+        if(results1 !== undefined)
+            results1.map((item,index) => {
+                if(item.name === "data")
+                    results = item.values
+            })
        
         var columns = [];
         if(results !== undefined) { 
@@ -68,7 +81,7 @@ class ReportTemplate extends React.Component {
                 </div>
                 <div className="panel panel-primary clearfix" style={{clear:'both'}}>
                     <div className="panel-heading">
-                        <h4 className="panel-title">Trade History</h4>
+                        <h4 className="panel-title">{screenName}</h4>
                     </div>
                     <div className="panel-body">
                         <div className="col-md-12 col-sm-12 head-cls">
@@ -101,8 +114,6 @@ class ReportTemplate extends React.Component {
     }
 }
 function mapStateToProps(state) { 
-    console.log("mapStateToProps")
-    console.log(state)
     const { reportdata,reportdatatable } = state;
     return { reportdata,reportdatatable };
 }

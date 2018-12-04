@@ -10,8 +10,8 @@ class NavBarItem extends React.Component {
     
     handleLink(e,linkItem){
         // e.preventDefault();
-        console.log("11111111111111")
-        console.log(linkItem)
+        // console.log("11111111111111")
+        // console.log(linkItem)
     }
     CreateNavLinks(){
         const { classname,  item } = this.props;
@@ -25,12 +25,12 @@ class NavBarItem extends React.Component {
                 if(link.subitem !== undefined){
                     let arr_sub = link.subitem;
                     let element_sub = arr_sub.map((link,index) =>{
-                        return <li onClick={(e) => this.handleLink(e,item)} key={link.id.toString()} id={link.id.toString()} ><Link to={"/report/"+link.id}> {link.label} </Link> </li>;
+                        return <li onClick={(e) => this.handleLink(e,item)} key={link.image.toString()} id={link.image.toString()} ><Link to={"/report/"+link.image}> {link.label} </Link> </li>;
                     });
-                    return <li className="dropdown dropdown-submenu" key={link.id.toString()} id={link.id.toString()}><a className="dropdown-toggle" data-toggle="dropdown">{link.label}<span className=""></span></a><ul className="dropdown-menu"  key={link.id.toString()}  id={link.id.toString()} >{element_sub}</ul></li>;
+                    return <li className="dropdown dropdown-submenu" key={link.image.toString()} id={link.image.toString()}><a className="dropdown-toggle" data-toggle="dropdown">{link.label}<span className=""></span></a><ul className="dropdown-menu"  key={link.image.toString()}  id={link.image.toString()} >{element_sub}</ul></li>;
                 }
                 else{
-                    return <li key={link.id.toString()} id={link.id.toString()} ><Link to={"/report/"+link.id}> {link.label} </Link> </li>;
+                    return <li key={link.image.toString()} id={link.image.toString()} ><Link to={"/report/"+link.image}> {link.label} </Link> </li>;
                 }
             });
             return(

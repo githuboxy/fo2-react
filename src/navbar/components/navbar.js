@@ -3,6 +3,7 @@ import NavBarItem from './navbaritem';
 import { connect } from 'react-redux';
 import { navbarActions } from '../actions/navbar.actions';
 
+
 class NavBar extends React.Component {
     componentDidMount() {
          this.props.dispatch(navbarActions.fetchNavlinks());
@@ -15,7 +16,7 @@ class NavBar extends React.Component {
         if(result !== undefined){
             linkmap= result.map((item) => {
                 if(item.label === "Home"){
-                    return  <NavBarItem key={item.id} classname={"active"} item={item}/>
+                    return <NavBarItem key={item.id} classname={"active"} item={item}/>
                 }else if(item.subitem !== undefined){
                     return <NavBarItem classname="dropdown" key={item.id} item={item} />
                 }else{ 

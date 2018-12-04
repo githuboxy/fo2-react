@@ -39,8 +39,6 @@ class Filters extends React.Component {
                 filtObj[this.props.data.reportdata[i].name] = "Dec 01, 2018";//this.state.endDate.format("MMM DD, YYYY");
            }
           }  
-      
-          
           this.props.method(filtObj);
      }
     render(){ 
@@ -48,15 +46,15 @@ class Filters extends React.Component {
         let filetermarkup;
         
         if(data.reportdata !== undefined){            
-        filetermarkup = data.reportdata.map((filter,index) => {
+        filetermarkup = data.reportdata.map((filter,index) => { 
             if(filter.type === "Select"){
              return(    
               <div className="form-group col-md-2 col-sm-2" key={filter.id.toString()}>
                    <label> { filter.label } :</label>
                    <select ref={ filter.name }  name={filter.name} className="form-control input-sm">
                       {
-                           filter.values.map((obj) => {
-                              return <option key={obj.id} value={obj.id}>{obj.name}</option>
+                           filter.values.map((obj,index) => { 
+                              return <option key={index} value={obj.id}>{obj.name}</option>
                           })
                        } 
                    </select>

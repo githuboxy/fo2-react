@@ -22,7 +22,7 @@ class App extends React.Component {
         });
     }
 
-    render() {
+    render() { 
         const { alert } = this.props;
         return (
             

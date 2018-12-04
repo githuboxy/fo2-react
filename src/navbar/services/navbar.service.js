@@ -7,9 +7,7 @@ export const navbarService = {
 
 
 function fetchNavbar() { 
-    var user = JSON.parse(localStorage.getItem('user'));
-    console.log("navbar token--->")
-    console.log(user[0].token);
+    var user = JSON.parse(localStorage.getItem('user')); 
     var filtObj = {};
         filtObj["token"] =user[0].token;
 
