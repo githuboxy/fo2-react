@@ -9,7 +9,7 @@ import { HomePage } from '../rootindex/pages';
 import { LoginPage } from '../rootindex/pages';
 import { RegisterPage } from '../rootindex/pages';
 import { ReportTemplate } from '../reports/components/ReportTemplate';
-import Helloworld from '../user/pages/Helloworld'; 
+import TradeEntry from '../tradeentry/TradeEntry'; 
 
 class App extends React.Component {
     constructor(props) {
@@ -37,7 +37,7 @@ class App extends React.Component {
                                 <PrivateRoute exact path="/" component={HomePage} />
                                 <Route path="/login" component={LoginPage} />
                                 <Route path="/register" component={RegisterPage} />
-                                <Route path="/hello" component={Helloworld} />
+                                <Route path="/tradeentry" component={TradeEntry} />
                                 <Route path="/report/*" component={ReportTemplate} />
                             </Switch>
                         </Router>

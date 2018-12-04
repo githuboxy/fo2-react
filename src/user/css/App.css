@@ -134,3 +134,11 @@ body{
   .panel-heading{
     background-color: #4E8FCC !important
   }
+  .react-tabs__tab{
+    font-size: 14px !important;
+  }
+  .react-tabs__tab--selected{
+    font-weight: bold;
+    background-color: #4E8FCC !important;
+    color:#fff !important;
+  }
