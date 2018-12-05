@@ -6,6 +6,7 @@ import { users } from '../user/reducers/users.reducer';
 import { navlinks } from '../navbar/reducers/navbar.reducer';
 import { alert } from '../common/reducers/alert.reducer';
 import { reportdata,reportdatatable } from '../reports/reducers/report.reducer';
+import { tradedata } from '../tradeentry/reducers/trade.reducer';
  
 const rootReducer = combineReducers({
   authentication,
@@ -14,7 +15,8 @@ const rootReducer = combineReducers({
   navlinks,
   alert,
   reportdata,
-  reportdatatable
+  reportdatatable,
+  tradedata
 });
 
 export default rootReducer;

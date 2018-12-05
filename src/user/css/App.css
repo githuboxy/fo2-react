@@ -142,3 +142,11 @@ body{
     background-color: #4E8FCC !important;
     color:#fff !important;
   }
+  .divborder{
+    border:1px solid #ccc;
+    height: 200px;
+  }
+  .paddAll{
+    padding: 5px !important;
+    border-right: 1px solid #ccc !important;
+  }

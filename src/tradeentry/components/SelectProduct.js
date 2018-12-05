@@ -1,14 +1,18 @@
 import React from 'react'; 
 import { Tabs, TabList, Tab, TabPanel } from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
-import '../user/css/App.css';
+import '../../user/css/App.css';
 import TradeTable from './TradeTable';
 class SelectProduct extends React.Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = { tabIndex: 0 };
+        this.selectTradeSubmit = this.selectTradeSubmit.bind(this); 
       }
-    render(){
+      selectTradeSubmit(obj){ 
+         this.props.method1(obj);
+      }
+    render(){ 
         return(
             <div className="col-md-12">
                 <label>Product Category : </label>
@@ -22,7 +26,7 @@ class SelectProduct extends React.Component {
                             </TabList>
                             <TabPanel>
                                 <div className="col-md-8">
-                                    <TradeTable />
+                                    <TradeTable method={this.selectTradeSubmit.bind(this)} tdata={this.props.data}/>
                                 </div>
                             </TabPanel>
                             <TabPanel>

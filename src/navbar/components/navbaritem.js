@@ -17,7 +17,7 @@ class NavBarItem extends React.Component {
         const { classname,  item } = this.props;
         if(classname !== "dropdown" || item.subitem === undefined){
             return(
-                <li onClick={(e) => this.handleLink(item)}  className={classname} ><Link to={"/tradeentry"}>{item.label}</Link></li>
+                <li onClick={(e) => this.handleLink(item)}  className={classname} ><Link to={"DEALENT"}>{item.label}</Link></li>
             );
         }else{
             let arr = item.subitem; 

@@ -1,18 +1,36 @@
 import React from 'react'; 
-import { NavBar } from '../navbar/components/navbar';
+import { NavBar } from '../../navbar/components/navbar';
 import { Link } from 'react-router-dom';
 import { Tabs, TabList, Tab, TabPanel } from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
-import '../user/css/App.css';
+import '../../user/css/App.css';
+import { connect } from 'react-redux';
 import SelectProduct from './SelectProduct';
 import EnterTrade from './EnterTrade';
 import ConfirmTrade from './ConfirmTrade';
+import { tradeActions } from '../actions/trade.actions';
+
 class TradeEntry extends React.Component {
     constructor() {
         super();
-        this.state = { tabIndex: 0 };
+        this.state = { tabIndex: 0, enterdata: '' };
+        this.tradeSubmit = this.tradeSubmit.bind(this); 
+      }
+      componentDidMount(){
+        this.props.dispatch(tradeActions.fetchTradeData());
+      }
+      tradeSubmit(obj){
+        this.state.enterdata = obj;
+        this.setState({ tabIndex:1 })
       }
     render(){
+        const{ tradedata } = this.props.tradedata;
+        let results;
+        if(tradedata !== undefined)
+        tradedata.map((item,index) => {
+            if(item.name === "data")
+                results = item.values
+        })  
         return(
             <div>
                 <NavBar />
@@ -33,10 +51,10 @@ class TradeEntry extends React.Component {
                             <Tab>3. Confirm Trade  </Tab>
                             </TabList>
                             <TabPanel>
-                                <SelectProduct />
+                                <SelectProduct method1={this.tradeSubmit.bind(this)} data={results}/>
                             </TabPanel>
                             <TabPanel>
-                                <EnterTrade />
+                                <EnterTrade selectedRows={this.state.enterdata} data={this.props.tradedata}/>
                             </TabPanel>
                             <TabPanel>
                                 <ConfirmTrade />
@@ -49,5 +67,10 @@ class TradeEntry extends React.Component {
         );
     }
 }
+function mapStateToProps(state) { 
+    const { tradedata } = state;
+    return { tradedata };
+}
 
-export default TradeEntry;
+const connectedTradeEntry = connect(mapStateToProps)(TradeEntry);
+export { connectedTradeEntry as TradeEntry };
