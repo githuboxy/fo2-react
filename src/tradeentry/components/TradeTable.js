@@ -49,8 +49,8 @@ class TradeTable extends React.Component {
 			this.props.method(this.state.selected) 
 	}
 	render() { 
-		var columns = [];
-		var results = this.props.tdata;
+		var columns = []; 
+		var results = this.props.columns;
 		columns.push({
 			id: "checkbox",
 			accessor: "",
@@ -84,21 +84,12 @@ class TradeTable extends React.Component {
 		})
         if(results !== undefined) { 
            results.map((item,index) => {
-                if(index === 0){
-                    var s =  item;                     
-                    for(var k in s) { 
-						if(k!== "rowNumber" && k!== "mmfFundAcct" && k!== "mmfInvestAcct" && k!== "mmfProdId" && k!== "mmfsettlementAccountRefNbr" && k!== "navType" && k!== "transTypes" )
 							columns.push({
-							Header: k,
-							accessor: k 
+								Header: item,
+								accessor:item 
 							});
-                
-                    }
-                }
-            }); 
-            
+						});      
 		}
- 		 
 
 		return (
 			<div>

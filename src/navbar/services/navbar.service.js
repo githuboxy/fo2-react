@@ -1,6 +1,6 @@
 import { authHeader,fetchHelper } from '../../_helpers';
 import { alertConstants } from '../../common/constants/alert.constants';
-
+import FormData from 'form-data';
 export const navbarService = {
     fetchNavbar
 };
@@ -8,9 +8,10 @@ export const navbarService = {
 
 function fetchNavbar() { 
     var user = JSON.parse(localStorage.getItem('user')); 
-    var filtObj = {};
-        filtObj["token"] =user[0].token;
+    var filtObj = new FormData();
+        filtObj.set("token",user[0].token)
+        // filtObj["token"] =user[0].token;
 
-    let _navLinks = fetchHelper.httpPost(alertConstants.URL+'/reactjs/reactJSUtil.jsp?actionFlag=TOPPANEL',filtObj);
+    let _navLinks = fetchHelper.httpFormPost(alertConstants.URL+'/reactjs/reactJSUtil.jsp?actionFlag=TOPPANEL',filtObj);
     return _navLinks;
 }

@@ -1,7 +1,7 @@
 import { authHeader } from  './auth-header';
 import { alertConstants } from '../common/constants/alert.constants';
 import axios from 'axios'; 
-
+import FormData from 'form-data';
 export const fetchHelper = {
 		httpGet,
 		httpPost,
@@ -89,8 +89,11 @@ function handleFormResponse(response) {
 
 
 function login(username,password) {
-	return  fetchHelper.httpPost(alertConstants.URL+'/reactjs/reactJSUtil.jsp?actionFlag=VALIDATE_LOGIN', 
-	    	{ 'loginName':username, 'noOneKnows':password}).then(user => {
+	var loginDetails = new FormData();
+	loginDetails.set("loginName",username)
+	loginDetails.set("noOneKnows",password)
+	return  fetchHelper.httpFormPost(alertConstants.URL+'/reactjs/reactJSUtil.jsp?actionFlag=VALIDATE_LOGIN', 
+	loginDetails).then(user => {
 			// login successful if there's a jwt token in the response
 		 
 	        if (user[0].token) {

@@ -26,7 +26,7 @@ class SelectProduct extends React.Component {
                             </TabList>
                             <TabPanel>
                                 <div className="col-md-8">
-                                    <TradeTable method={this.selectTradeSubmit.bind(this)} tdata={this.props.data}/>
+                                    <TradeTable method={this.selectTradeSubmit.bind(this)} columns={this.props.columns} tdata={this.props.data}/>
                                 </div>
                             </TabPanel>
                             <TabPanel>

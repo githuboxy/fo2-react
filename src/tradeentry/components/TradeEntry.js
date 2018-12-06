@@ -9,12 +9,15 @@ import SelectProduct from './SelectProduct';
 import EnterTrade from './EnterTrade';
 import ConfirmTrade from './ConfirmTrade';
 import { tradeActions } from '../actions/trade.actions';
+import FormData from 'form-data';
 
 class TradeEntry extends React.Component {
     constructor() {
         super();
         this.state = { tabIndex: 0, enterdata: '' };
         this.tradeSubmit = this.tradeSubmit.bind(this); 
+        this.reviewSubmit = this.reviewSubmit.bind(this);
+        this.confirmSubmit = this.confirmSubmit.bind(this);
       }
       componentDidMount(){
         this.props.dispatch(tradeActions.fetchTradeData());
@@ -22,15 +25,89 @@ class TradeEntry extends React.Component {
       tradeSubmit(obj){
         this.state.enterdata = obj;
         this.setState({ tabIndex:1 })
+         
+        var arr = [];
+        for(var k in obj){
+            arr.push({
+                "rowNumber" : k
+            });
+        }
+        var results2;
+       
+        this.props.tradedata.tradedata.map((item,index) => {
+            if(item.name === "data")
+                results2 = item.values;
+        })
+       var bodyFormdata = new FormData();
+        results2.map((item,index) => {
+             for(var i=0 ;i <arr.length;i++){
+                if(arr[i].rowNumber === item.rowNumber){
+                    for(var k in item){
+                        if(k === "fromPage" || k === "mmmfDealListSize")
+                            bodyFormdata.set(k,item[k]) 
+                        else
+                            bodyFormdata.set(k+item.rowNumber,item[k])
+                     }
+                }
+             }
+        });
+
+        this.props.dispatch(tradeActions.fetchTradeReviewData(bodyFormdata));
       }
+
+      reviewSubmit(){        
+        this.setState({ tabIndex:2 })
+      }
+      confirmSubmit(obj){ 
+        var arr = [];
+        for(var k in obj){
+            arr.push({
+                "rowNumber" : k
+            });
+        }
+        var results2;
+       
+        this.props.tradedata.tradedata.map((item,index) => {
+            if(item.name === "data")
+                results2 = item.values;
+        })   
+        var bodyFormdata = new FormData();
+        results2.map((item,index) => {
+             for(var i=0 ;i <arr.length;i++){
+                if(arr[i].rowNumber === item.rowNumber){
+                    for(var k in item){
+                        if(k === "fromPage" || k === "mmmfDealListSize")
+                            bodyFormdata.set(k,item[k]) 
+                        else
+                            bodyFormdata.set(k+item.rowNumber,item[k])
+                     }
+                }
+             }
+        });
+        this.props.dispatch(tradeActions.fetchTradeConfirmData(bodyFormdata));
+      }
+
     render(){
         const{ tradedata } = this.props.tradedata;
-        let results;
+        const{ tradereviewdata } = this.props.tradereviewdata; 
+        const{ tradeconfirmdata } = this.props.tradeconfirmdata; 
+        
+        let results,results1,columns;
         if(tradedata !== undefined)
         tradedata.map((item,index) => {
             if(item.name === "data")
                 results = item.values
+            if(item.name === "Columns")
+                columns = item.values
         })  
+
+        if(tradereviewdata !== undefined)
+        tradereviewdata.map((item,index) => { 
+            if(item.name === "data")
+                results1 = item.values
+            
+        })   
+        
         return(
             <div>
                 <NavBar />
@@ -51,13 +128,13 @@ class TradeEntry extends React.Component {
                             <Tab>3. Confirm Trade  </Tab>
                             </TabList>
                             <TabPanel>
-                                <SelectProduct method1={this.tradeSubmit.bind(this)} data={results}/>
+                                <SelectProduct method1={this.tradeSubmit.bind(this)} data={results} columns={columns}/>
                             </TabPanel>
                             <TabPanel>
-                                <EnterTrade selectedRows={this.state.enterdata} data={this.props.tradedata}/>
+                                <EnterTrade method={this.reviewSubmit.bind(this)} selectedRows={this.state.enterdata} data={results1}/>
                             </TabPanel>
                             <TabPanel>
-                                <ConfirmTrade />
+                                <EnterTrade flag="confirm" method2={this.confirmSubmit.bind(this)} selectedRows={this.state.enterdata} data={results1}/>
                             </TabPanel>
                         </Tabs>
                         </div>
@@ -68,8 +145,8 @@ class TradeEntry extends React.Component {
     }
 }
 function mapStateToProps(state) { 
-    const { tradedata } = state;
-    return { tradedata };
+    const { tradedata,tradereviewdata,tradeconfirmdata } = state;
+    return { tradedata,tradereviewdata,tradeconfirmdata };
 }
 
 const connectedTradeEntry = connect(mapStateToProps)(TradeEntry);

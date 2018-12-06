@@ -26,7 +26,6 @@ class ReportTemplate extends React.Component {
    }
    shouldComponentUpdate(nextProps,nextState) {   
         const update = this.props.reportdata !== nextProps.reportdata; 
-        
         if(!update)
            this.getFilter()
 
@@ -43,12 +42,11 @@ class ReportTemplate extends React.Component {
     render(){
         var screenName = window.location.href;
         screenName = screenName.substring(screenName.length,screenName.length-7)
-         
 
         const { reportdata,reportdatatable } = this.props; 
         var results1  = reportdatatable.reportdatatable;
         var results;
-
+        
         if(results1 !== undefined)
             results1.map((item,index) => {
                 if(item.name === "data")

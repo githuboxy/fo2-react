@@ -17,7 +17,7 @@ class NavBarItem extends React.Component {
         const { classname,  item } = this.props;
         if(classname !== "dropdown" || item.subitem === undefined){
             return(
-                <li onClick={(e) => this.handleLink(item)}  className={classname} ><Link to={"DEALENT"}>{item.label}</Link></li>
+                <li onClick={(e) => this.handleLink(item)}  className={classname} ><Link to={""}>{item.label}</Link></li>
             );
         }else{
             let arr = item.subitem; 
@@ -30,6 +30,9 @@ class NavBarItem extends React.Component {
                     return <li className="dropdown dropdown-submenu" key={link.image.toString()} id={link.image.toString()}><a className="dropdown-toggle" data-toggle="dropdown">{link.label}<span className=""></span></a><ul className="dropdown-menu"  key={link.image.toString()}  id={link.image.toString()} >{element_sub}</ul></li>;
                 }
                 else{
+                    if(link.label === "Trade Entry")
+                        return <li key={link.image.toString()} id={link.image.toString()} ><Link to={link.image}> {link.label} </Link> </li>;
+                    else
                     return <li key={link.image.toString()} id={link.image.toString()} ><Link to={"/report/"+link.image}> {link.label} </Link> </li>;
                 }
             });
