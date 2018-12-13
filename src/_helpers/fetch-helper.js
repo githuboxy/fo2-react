@@ -29,14 +29,7 @@ function httpPost(url,jsonBody,extraHeaders=null) {
 	   return fetch(url,requestOptions).then(handleResponse);
 }
 
-function httpFormPost(url,jsonBody,extraHeaders=null) {
-	const requestOptions = {
-		 method: 'POST',
-		 headers: { ...authHeader(),...extraHeaders,'Content-Type': 'application/x-www-form-urlencoded' },
-		 //body: "clientFirm=ALL&"//+jsonBody.get("clientFirm")
-		 body:JSON.stringify(jsonBody)
-	 };
-	 //return fetch(url,requestOptions).then(handleResponse);
+function httpFormPost(url,jsonBody) {
 	return axios({
 		method: 'post',
 		url:url,

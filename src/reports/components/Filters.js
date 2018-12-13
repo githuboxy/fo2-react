@@ -8,22 +8,26 @@ class Filters extends React.Component {
         super() 
         this.state = { 
           startDate: moment(),
-          endDate: moment()
+          endDate: moment(),
+          ck : false
         }; 
         this.handleStartDateChange = this.handleStartDateChange.bind(this); 
         this.handleEndDateChange = this.handleEndDateChange.bind(this); 
         
       } 
+      componentWillMount(){
+        this.doChange();
+      }
       handleStartDateChange(date) {  
          this.setState({startDate:date});
       }
       handleEndDateChange(date) {  
         this.setState({endDate:date});
      }
-     doChange(e){
-      var filtObj = {};
-      console.log("temp1")
+     doChange(e){ 
       
+      var filtObj = {};
+     if(this.props.data.reportdata !== undefined)      
       for(var i =0; i<this.props.data.reportdata.length; i++){
          var temp = this.props.data.reportdata[i].name; 
          
@@ -34,17 +38,22 @@ class Filters extends React.Component {
 
             if(this.props.data.reportdata[i].type === "datepicker"){ 
               if(this.props.data.reportdata[i].name === "fromDate")
-                filtObj[this.props.data.reportdata[i].name] = "Nov 01, 2018";//this.state.startDate.format("MMM DD, YYYY");
+                filtObj[this.props.data.reportdata[i].name] = this.refs[temp].value; //this.state.startDate.format("MMM DD, YYYY");
               if(this.props.data.reportdata[i].name === "toDate")
-                filtObj[this.props.data.reportdata[i].name] = "Dec 01, 2018";//this.state.endDate.format("MMM DD, YYYY");
+                filtObj[this.props.data.reportdata[i].name] = this.refs[temp].value; //this.state.endDate.format("MMM DD, YYYY");
            }
           }  
-          this.props.method(filtObj);
+
+          if(this.state.ck===false){
+            this.props.method({});
+          }else
+            this.props.method(filtObj);
      }
+      
     render(){ 
+      
         const { data } = this.props;
-        let filetermarkup;
-        
+        let filetermarkup; 
         if(data.reportdata !== undefined){            
         filetermarkup = data.reportdata.map((filter,index) => { 
             if(filter.type === "Select"){
@@ -65,14 +74,16 @@ class Filters extends React.Component {
                  return (
                    <div className="form-group col-md-2 col-sm-2" key={filter.id.toString()}>
                        <label> { filter.label }:</label>
-                     <DatePicker dateFormat="MMM DD, YYYY" ref={ filter.name } name={filter.name} className="form-control"     onChange={this.handleStartDateChange} />
+                       <input readOnly ref={ filter.name } name={filter.name} className="form-control" value="Dec 01, 2018" />
+                     {/* <DatePicker dateFormat="MMM DD, YYYY" ref={ filter.name } name={filter.name} className="form-control"     onChange={this.handleStartDateChange} /> */}
                    </div>
                  );
                 }else if(filter.name === "toDate"){
                  return (
                    <div className="form-group col-md-2 col-sm-2" key={filter.id.toString()}>
                        <label> { filter.label }:</label>
-                     <DatePicker dateFormat="MMM DD, YYYY" ref={ filter.name } name={filter.name} className="form-control"    onChange={this.handleEndDateChange} />
+                       <input readOnly ref={ filter.name } name={filter.name} className="form-control" value="Dec 13, 2018" />
+                     {/* <DatePicker dateFormat="MMM DD, YYYY" ref={ filter.name } name={filter.name} className="form-control"    onChange={this.handleEndDateChange} /> */}
                    </div>
                  );
                 }
@@ -112,10 +123,10 @@ class Filters extends React.Component {
                );      
               }else if(filter.type === "newline"){
                 return  <div key="newline" className="clearfix"></div>        
-              }
+              } 
         });
     }
-
+ 
         return(
             <div>
                 {filetermarkup}
