@@ -2,13 +2,13 @@ import React from 'react';
 import DatePicker from 'react-datepicker'; 
 import moment from 'moment';
 import 'react-datepicker/dist/react-datepicker.css'; 
-
+var dateFormat = require('dateformat');
 class Filters extends React.Component {
     constructor () { 
         super() 
         this.state = { 
-          startDate: moment(),
-          endDate: moment(),
+          startDate: new Date(),
+          endDate: new Date(),
           ck : false
         }; 
         this.handleStartDateChange = this.handleStartDateChange.bind(this); 
@@ -17,6 +17,18 @@ class Filters extends React.Component {
       } 
       componentWillMount(){
         this.doChange();
+      }
+      componentWillReceiveProps(){
+        if(this.props.data.reportdata !== undefined){            
+         this.props.data.reportdata.map((filter,index) => { 
+          if(filter.type === "datepicker"){
+            if(filter.name === "fromDate")
+                  this.state.startDate=new Date(filter.value)
+             
+          }
+         });
+        }
+             
       }
       handleStartDateChange(date) {  
          this.setState({startDate:date});
@@ -35,18 +47,16 @@ class Filters extends React.Component {
             console.log(this.props.data.reportdata[i].type)
             filtObj[this.props.data.reportdata[i].name] = this.refs[temp].value; 
           }
-
+ 
             if(this.props.data.reportdata[i].type === "datepicker"){ 
               if(this.props.data.reportdata[i].name === "fromDate")
-                filtObj[this.props.data.reportdata[i].name] = this.refs[temp].value; //this.state.startDate.format("MMM DD, YYYY");
+                filtObj[this.props.data.reportdata[i].name] = dateFormat(this.state.startDate,"mmm d, yyyy"); //this.state.startDate.format("MMM DD, YYYY");
               if(this.props.data.reportdata[i].name === "toDate")
-                filtObj[this.props.data.reportdata[i].name] = this.refs[temp].value; //this.state.endDate.format("MMM DD, YYYY");
+                filtObj[this.props.data.reportdata[i].name] = dateFormat(this.state.endDate,"mmm d, yyyy"); //this.state.endDate.format("MMM DD, YYYY");
            }
           }  
 
-          if(this.state.ck===false){
-            this.props.method({});
-          }else
+          
             this.props.method(filtObj);
      }
       
@@ -71,19 +81,22 @@ class Filters extends React.Component {
                );
             }else if(filter.type === "datepicker"){
                 if(filter.name === "fromDate"){
+                   
+                  
                  return (
                    <div className="form-group col-md-2 col-sm-2" key={filter.id.toString()}>
                        <label> { filter.label }:</label>
-                       <input readOnly ref={ filter.name } name={filter.name} className="form-control" value="Dec 01, 2018" />
-                     {/* <DatePicker dateFormat="MMM DD, YYYY" ref={ filter.name } name={filter.name} className="form-control"     onChange={this.handleStartDateChange} /> */}
+                       {/* <input readOnly ref={ filter.name } name={filter.name} className="form-control" value="Dec 01, 2018" /> */}
+                     <DatePicker dateFormat="MMM dd, YYYY" ref={ filter.name } name={filter.name} className="form-control"   selected={this.state.startDate}  onChange={this.handleStartDateChange} />
                    </div>
                  );
                 }else if(filter.name === "toDate"){
+                
                  return (
                    <div className="form-group col-md-2 col-sm-2" key={filter.id.toString()}>
                        <label> { filter.label }:</label>
-                       <input readOnly ref={ filter.name } name={filter.name} className="form-control" value="Dec 13, 2018" />
-                     {/* <DatePicker dateFormat="MMM DD, YYYY" ref={ filter.name } name={filter.name} className="form-control"    onChange={this.handleEndDateChange} /> */}
+                       {/* <input readOnly ref={ filter.name } name={filter.name} className="form-control" value="Dec 13, 2018" /> */}
+                     <DatePicker dateFormat="MMM dd, YYYY" ref={ filter.name } name={filter.name} className="form-control"  selected={this.state.endDate}   onChange={this.handleEndDateChange} />
                    </div>
                  );
                 }
