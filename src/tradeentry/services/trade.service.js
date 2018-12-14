@@ -4,7 +4,8 @@ import FromData from 'form-data';
 export const tradeService = {
     fetchTradeTable,
     fetchReviewData,
-    fetchConfirmData
+    fetchConfirmData,
+    fetchFixedTableData
 };
 
  
@@ -16,6 +17,8 @@ function fetchTradeTable() {
     if(user[0].token !== undefined){
         //filtObj["token"] =user[0].token;
         filtObj.set("token",user[0].token);
+        filtObj.set("clientFirm","81837075");
+        filtObj.set("parentProdId","1700");
         _tradeData = fetchHelper.httpFormPost(alertConstants.URL+'/'+pathname+'.do',filtObj);
     }
     return _tradeData;
@@ -49,4 +52,19 @@ function fetchConfirmData(bodyFormData) {
         _tradeConfirmData = fetchHelper.httpFormPost(alertConstants.URL+'/MULTIMMFINSERTTRADE.do',bodyFormData);
     }
     return _tradeConfirmData;
+}
+
+function fetchFixedTableData() { 
+    var user = JSON.parse(localStorage.getItem('user'));
+    var filtObj = new FromData(); 
+      
+     let _fixedtradeData; 
+    if(user[0].token !== undefined){
+        //filtObj["token"] =user[0].token;
+        filtObj.set("token",user[0].token);
+        filtObj.set("clientFirm","81837075");
+        filtObj.set("parentProdId","TERM");
+        _fixedtradeData = fetchHelper.httpFormPost(alertConstants.URL+'/DEALING.do',filtObj);
+    }
+    return _fixedtradeData;
 }

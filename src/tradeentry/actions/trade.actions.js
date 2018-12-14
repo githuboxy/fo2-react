@@ -4,7 +4,8 @@ import { tradeService } from '../services/trade.service';
 export const tradeActions = {
     fetchTradeData,
     fetchTradeReviewData,
-    fetchTradeConfirmData
+    fetchTradeConfirmData,
+    fetchFixedData
 };
 
 function fetchTradeData() {
@@ -41,8 +42,7 @@ function fetchTradeReviewData(bodyFormData){
  
 }
 
-function fetchTradeConfirmData(bodyFormData){ 
-    console.log("fetchTradeConfirmData")
+function fetchTradeConfirmData(bodyFormData){  
     return dispatch => {
         dispatch(request());
 
@@ -57,4 +57,20 @@ function fetchTradeConfirmData(bodyFormData){
     function success(tradeconfirmdata) { return { type: tradeConstants.GETTRADECONFIRMDATA_SUCCESS, tradeconfirmdata } }
     function failure(error) { return { type: tradeConstants.GETTRADECONFIRMDATA_FAILURE, error } }
  
+}
+
+function fetchFixedData() {
+    return dispatch => {
+        dispatch(request());
+
+        tradeService.fetchFixedTableData()
+            .then(
+                fixedtradedata => dispatch(success(fixedtradedata)),
+                error => dispatch(failure(error))
+            );
+    };
+
+    function request() { return { type: tradeConstants.GETFIXEDDATA_REQUEST } }
+    function success(fixedtradedata) { return { type: tradeConstants.GETFIXEDDATA_SUCCESS, fixedtradedata } }
+    function failure(error) { return { type: tradeConstants.GETFIXEDDATA_FAILURE, error } }
 }

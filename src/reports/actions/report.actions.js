@@ -22,8 +22,7 @@ function fetchReportData() {
     function failure(error) { return { type: reportConstants.GETREPORTDATA_FAILURE, error } }
 }
 
-function fetchReportTableData(bodyFormData){ 
-    console.log("fetchReportTableData")
+function fetchReportTableData(bodyFormData){  
     return dispatch => {
         dispatch(request());
 

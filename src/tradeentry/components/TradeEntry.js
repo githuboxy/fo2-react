@@ -5,7 +5,7 @@ import { Tabs, TabList, Tab, TabPanel } from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
 import '../../user/css/App.css';
 import { connect } from 'react-redux';
-import SelectProduct from './SelectProduct';
+import { SelectProduct } from './SelectProduct';
 import EnterTrade from './EnterTrade';
 import ConfirmTrade from './ConfirmTrade';
 import { tradeActions } from '../actions/trade.actions';
@@ -16,6 +16,7 @@ class TradeEntry extends React.Component {
         super();
         this.state = { tabIndex: 0, enterdata: '' };
         this.tradeSubmit = this.tradeSubmit.bind(this); 
+        this.fixedTradeSubmit = this.fixedTradeSubmit.bind(this); 
         this.reviewSubmit = this.reviewSubmit.bind(this);
         this.confirmSubmit = this.confirmSubmit.bind(this);
       }
@@ -23,6 +24,38 @@ class TradeEntry extends React.Component {
         this.props.dispatch(tradeActions.fetchTradeData());
       }
       tradeSubmit(obj){
+        this.state.enterdata = obj;
+        this.setState({ tabIndex:1 })
+         
+        var arr = [];
+        for(var k in obj){
+            arr.push({
+                "rowNumber" : k
+            });
+        }
+        var results2;
+       
+        this.props.tradedata.tradedata.map((item,index) => {
+            if(item.name === "data")
+                results2 = item.values;
+        })
+       var bodyFormdata = new FormData();
+        results2.map((item,index) => {
+             for(var i=0 ;i <arr.length;i++){
+                if(arr[i].rowNumber === item.rowNumber){
+                    for(var k in item){
+                        if(k === "fromPage" || k === "mmmfDealListSize")
+                            bodyFormdata.set(k,item[k]) 
+                        else
+                            bodyFormdata.set(k+item.rowNumber,item[k])
+                     }
+                }
+             }
+        });
+
+        this.props.dispatch(tradeActions.fetchTradeReviewData(bodyFormdata));
+      }
+      fixedTradeSubmit(obj){
         this.state.enterdata = obj;
         this.setState({ tabIndex:1 })
          
@@ -128,7 +161,7 @@ class TradeEntry extends React.Component {
                             <Tab>3. Confirm Trade  </Tab>
                             </TabList>
                             <TabPanel>
-                                <SelectProduct method1={this.tradeSubmit.bind(this)} data={results} columns={columns}/>
+                                <SelectProduct method1={this.tradeSubmit.bind(this)} fixedmethod={this.fixedTradeSubmit.bind(this)} data={results} columns={columns}/>
                             </TabPanel>
                             <TabPanel>
                                 <EnterTrade method={this.reviewSubmit.bind(this)} selectedRows={this.state.enterdata} data={results1}/>

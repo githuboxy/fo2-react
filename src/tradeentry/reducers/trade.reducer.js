@@ -61,4 +61,24 @@ export function tradedata(state = {}, action) {
     }
   }
 
+  export function fixedtradedata(state = {}, action) {
+    switch (action.type) {
+      case tradeConstants.GETFIXEDDATA_REQUEST:
+        return {
+          loading: true
+        };
+      case tradeConstants.GETFIXEDDATA_SUCCESS:
+        return {
+            fixedtradedata: action.fixedtradedata
+        };
+      case tradeConstants.GETFIXEDDATA_FAILURE:
+        return { 
+          error: action.error
+        };
+      
+      default:
+        return state
+    }
+  }
+
  
