@@ -10,7 +10,7 @@ import EnterTrade from './EnterTrade';
 import ConfirmTrade from './ConfirmTrade';
 import { tradeActions } from '../actions/trade.actions';
 import FormData from 'form-data';
-
+import { Route } from 'react-router-dom'
 class TradeEntry extends React.Component {
     constructor() {
         super();
@@ -150,10 +150,25 @@ class TradeEntry extends React.Component {
       }
 
     render(){
+         
         const{ tradedata } = this.props.tradedata;
         const{ tradereviewdata } = this.props.tradereviewdata; 
         const{ fixedtradereviewdata } = this.props.fixedtradereviewdata; 
-        
+        const{ fixedtradeconfirmdata } = this.props.fixedtradeconfirmdata; 
+        let tradesubmitbtn;
+        if(fixedtradeconfirmdata !== undefined)
+            if(fixedtradeconfirmdata.FIXRED_TERM_TRADEINITIATED === "YES"){
+                tradesubmitbtn =
+                <Route render={({ history}) => (
+                    <button  className="btn btn-primary btn-xs"
+                        type='button'
+                        onClick={() => { history.push('/report/TRDINQR') }}
+                    >
+                        View Trade History
+                  </button>
+                )} />
+            }
+            
         let results,results1,columns;
         if(tradedata !== undefined)
         tradedata.map((item,index) => {
@@ -201,16 +216,18 @@ class TradeEntry extends React.Component {
                                 <EnterTrade fixed={this.state.fixed} flag="confirm" method2={this.confirmSubmit.bind(this)} selectedRows={this.state.enterdata} data={results1}/>
                             </TabPanel>
                         </Tabs>
+                        {tradesubmitbtn}
                         </div>
                     </div>
                 </div>
+               
             </div>
         );
     }
 }
 function mapStateToProps(state) { 
-    const { tradedata,tradereviewdata,tradeconfirmdata,fixedtradedata,fixedtradereviewdata } = state;
-    return { tradedata,tradereviewdata,tradeconfirmdata,fixedtradedata,fixedtradereviewdata };
+    const { tradedata,tradereviewdata,tradeconfirmdata,fixedtradedata,fixedtradereviewdata,fixedtradeconfirmdata } = state;
+    return { tradedata,tradereviewdata,tradeconfirmdata,fixedtradedata,fixedtradereviewdata,fixedtradeconfirmdata };
 }
 
 const connectedTradeEntry = connect(mapStateToProps)(TradeEntry);
