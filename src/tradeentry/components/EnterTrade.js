@@ -97,7 +97,7 @@ class EnterTrade extends React.Component {
                                  <td className="paddAll">
                                     <div  className="form-group">
                                         <label className="pull-left">Product:</label>
-                                        <label className="pull-right TxtNrml">{res.product}</label>
+                                        <label className="pull-right TxtNrml">{res.ProductName}</label>
                                     </div>
                                     <div className="clearfix"></div>
                                     <div  className="form-group">

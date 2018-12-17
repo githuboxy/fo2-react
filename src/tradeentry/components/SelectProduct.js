@@ -19,7 +19,7 @@ class SelectProduct extends React.Component {
       selectTradeSubmit(obj){ 
          this.props.method1(obj);
       }
-      selectFixedTradeSubmit(obj){ 
+      selectFixedTradeSubmit(obj){
         this.props.fixedmethod(obj);
      }
       componentDidMount(){

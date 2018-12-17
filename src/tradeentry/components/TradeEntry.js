@@ -57,16 +57,11 @@ class TradeEntry extends React.Component {
         this.props.dispatch(tradeActions.fetchTradeReviewData(bodyFormdata));
       }
       fixedTradeSubmit(obj){
-         
+        
         this.state.enterdata = obj;
         this.setState({ tabIndex:1 })
          
-        var arr = [];
-        for(var k in obj){
-            arr.push({
-                "rowNumber" : k
-            });
-        }
+        
         var results2;
         
          if(this.props.fixedtradedata.fixedtradedata !== undefined)
@@ -74,20 +69,17 @@ class TradeEntry extends React.Component {
             if(item.name === "data")
                 results2 = item.values;
         })
-      
+        
        var bodyFormdata = new FormData();
         results2.map((item,index) => {
-             for(var i=0 ;i <arr.length;i++){
-                if(arr[i].rowNumber === item.rowNumber){
-                    console.log(item.rowNumber)
-                    for(var k in item){ 
-                        if(k === "fromPage")
-                            bodyFormdata.set(k,"dealing") 
-                        else
-                            bodyFormdata.set(k,item[k])
-                     }
-                }
-             }
+            if(obj === item.rowNumber){
+                for(var k in item){ 
+                    if(k === "fromPage")
+                        bodyFormdata.set(k,"dealing") 
+                    else
+                        bodyFormdata.set(k,item[k])
+                    }
+            }
         });
       
          this.props.dispatch(tradeActions.fetchFixedTradeReviewData(bodyFormdata));
@@ -113,16 +105,14 @@ class TradeEntry extends React.Component {
                if(item.name === "data")
                    results2 = item.values[0].TradeDetails;
            })
-          console.log(results2)
-          for(var k in results2){
-              console.log(k)
+          
+          for(var k in results2){ 
             if(k === "fromPage"){
                 bodyFormdata.set(k,"dealing") 
             }else
                 bodyFormdata.set(k,results2[k])
          }
-         bodyFormdata.set("product","14201560") 
-         bodyFormdata.set("productCat","14201560") 
+         
          bodyFormdata.set("paymentMethod","Roy Inc Europe Set02:201801020202") 
          bodyFormdata.set("maturityAccount","Roy Inc Europe Set02:201801020202") 
  
@@ -147,7 +137,7 @@ class TradeEntry extends React.Component {
         });
         this.props.dispatch(tradeActions.fetchTradeConfirmData(bodyFormdata));
     }
-      }
+}
 
     render(){
          
