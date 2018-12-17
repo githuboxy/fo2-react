@@ -81,4 +81,46 @@ export function tradedata(state = {}, action) {
     }
   }
 
+  export function fixedtradereviewdata(state = {}, action) {
+    switch (action.type) {
+      case tradeConstants.GETFIXEDTRADEREVIEWDATA_REQUEST:
+        return {
+          loading: true
+        };
+      case tradeConstants.GETFIXEDTRADEREVIEWDATA_SUCCESS:
+        return {
+          fixedtradereviewdata: action.fixedtradereviewdata
+        };
+      case tradeConstants.GETFIXEDTRADEREVIEWDATA_FAILURE:
+        return { 
+          error: action.error
+        };
+      
+      default:
+        return state
+    }
+  }
+
+  export function fixedtradeconfirmdata(state = {}, action) {
+    switch (action.type) {
+      case tradeConstants.GETFIXEDTRADECONFIRMDATA_REQUEST:
+        return {
+          loading: true
+        };
+      case tradeConstants.GETFIXEDTRADECONFIRMDATA_SUCCESS:
+        return {
+          fixedtradeconfirmdata: action.fixedtradeconfirmdata
+        };
+      case tradeConstants.GETFIXEDTRADECONFIRMDATA_FAILURE:
+        return { 
+          error: action.error
+        };
+      
+      default:
+        return state
+    }
+  }
+  
+
+ 
  

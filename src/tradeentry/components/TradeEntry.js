@@ -14,7 +14,7 @@ import FormData from 'form-data';
 class TradeEntry extends React.Component {
     constructor() {
         super();
-        this.state = { tabIndex: 0, enterdata: '' };
+        this.state = { tabIndex: 0, enterdata: '',fixed:'' };
         this.tradeSubmit = this.tradeSubmit.bind(this); 
         this.fixedTradeSubmit = this.fixedTradeSubmit.bind(this); 
         this.reviewSubmit = this.reviewSubmit.bind(this);
@@ -22,6 +22,7 @@ class TradeEntry extends React.Component {
       }
       componentDidMount(){
         this.props.dispatch(tradeActions.fetchTradeData());
+        this.props.dispatch(tradeActions.fetchFixedData());
       }
       tradeSubmit(obj){
         this.state.enterdata = obj;
@@ -56,6 +57,7 @@ class TradeEntry extends React.Component {
         this.props.dispatch(tradeActions.fetchTradeReviewData(bodyFormdata));
       }
       fixedTradeSubmit(obj){
+         
         this.state.enterdata = obj;
         this.setState({ tabIndex:1 })
          
@@ -66,32 +68,37 @@ class TradeEntry extends React.Component {
             });
         }
         var results2;
-       
-        this.props.tradedata.tradedata.map((item,index) => {
+        
+         if(this.props.fixedtradedata.fixedtradedata !== undefined)
+        this.props.fixedtradedata.fixedtradedata.map((item,index) => {
             if(item.name === "data")
                 results2 = item.values;
         })
+      
        var bodyFormdata = new FormData();
         results2.map((item,index) => {
              for(var i=0 ;i <arr.length;i++){
                 if(arr[i].rowNumber === item.rowNumber){
-                    for(var k in item){
-                        if(k === "fromPage" || k === "mmmfDealListSize")
-                            bodyFormdata.set(k,item[k]) 
+                    console.log(item.rowNumber)
+                    for(var k in item){ 
+                        if(k === "fromPage")
+                            bodyFormdata.set(k,"dealing") 
                         else
-                            bodyFormdata.set(k+item.rowNumber,item[k])
+                            bodyFormdata.set(k,item[k])
                      }
                 }
              }
         });
-
-        this.props.dispatch(tradeActions.fetchTradeReviewData(bodyFormdata));
+      
+         this.props.dispatch(tradeActions.fetchFixedTradeReviewData(bodyFormdata));
+         this.setState({fixed:'fixed'})
       }
 
       reviewSubmit(){        
         this.setState({ tabIndex:2 })
       }
       confirmSubmit(obj){ 
+         
         var arr = [];
         for(var k in obj){
             arr.push({
@@ -99,12 +106,33 @@ class TradeEntry extends React.Component {
             });
         }
         var results2;
-       
+        var bodyFormdata = new FormData();
+       if(this.state.fixed === "fixed"){ 
+           if(this.props.fixedtradereviewdata.fixedtradereviewdata !== undefined)
+           this.props.fixedtradereviewdata.fixedtradereviewdata.map((item,index) => {
+               if(item.name === "data")
+                   results2 = item.values[0].TradeDetails;
+           })
+          console.log(results2)
+          for(var k in results2){
+              console.log(k)
+            if(k === "fromPage"){
+                bodyFormdata.set(k,"dealing") 
+            }else
+                bodyFormdata.set(k,results2[k])
+         }
+         bodyFormdata.set("product","14201560") 
+         bodyFormdata.set("productCat","14201560") 
+         bodyFormdata.set("paymentMethod","Roy Inc Europe Set02:201801020202") 
+         bodyFormdata.set("maturityAccount","Roy Inc Europe Set02:201801020202") 
+ 
+        this.props.dispatch(tradeActions.fetchFixedTradeConfirmData(bodyFormdata));
+    }else{
         this.props.tradedata.tradedata.map((item,index) => {
             if(item.name === "data")
                 results2 = item.values;
         })   
-        var bodyFormdata = new FormData();
+       
         results2.map((item,index) => {
              for(var i=0 ;i <arr.length;i++){
                 if(arr[i].rowNumber === item.rowNumber){
@@ -118,12 +146,13 @@ class TradeEntry extends React.Component {
              }
         });
         this.props.dispatch(tradeActions.fetchTradeConfirmData(bodyFormdata));
+    }
       }
 
     render(){
         const{ tradedata } = this.props.tradedata;
         const{ tradereviewdata } = this.props.tradereviewdata; 
-        const{ tradeconfirmdata } = this.props.tradeconfirmdata; 
+        const{ fixedtradereviewdata } = this.props.fixedtradereviewdata; 
         
         let results,results1,columns;
         if(tradedata !== undefined)
@@ -140,6 +169,8 @@ class TradeEntry extends React.Component {
                 results1 = item.values
             
         })   
+        if(fixedtradereviewdata !== undefined)
+            results1 = fixedtradereviewdata
         
         return(
             <div>
@@ -164,10 +195,10 @@ class TradeEntry extends React.Component {
                                 <SelectProduct method1={this.tradeSubmit.bind(this)} fixedmethod={this.fixedTradeSubmit.bind(this)} data={results} columns={columns}/>
                             </TabPanel>
                             <TabPanel>
-                                <EnterTrade method={this.reviewSubmit.bind(this)} selectedRows={this.state.enterdata} data={results1}/>
+                                <EnterTrade fixed={this.state.fixed} method={this.reviewSubmit.bind(this)} selectedRows={this.state.enterdata} data={results1}/>
                             </TabPanel>
                             <TabPanel>
-                                <EnterTrade flag="confirm" method2={this.confirmSubmit.bind(this)} selectedRows={this.state.enterdata} data={results1}/>
+                                <EnterTrade fixed={this.state.fixed} flag="confirm" method2={this.confirmSubmit.bind(this)} selectedRows={this.state.enterdata} data={results1}/>
                             </TabPanel>
                         </Tabs>
                         </div>
@@ -178,8 +209,8 @@ class TradeEntry extends React.Component {
     }
 }
 function mapStateToProps(state) { 
-    const { tradedata,tradereviewdata,tradeconfirmdata } = state;
-    return { tradedata,tradereviewdata,tradeconfirmdata };
+    const { tradedata,tradereviewdata,tradeconfirmdata,fixedtradedata,fixedtradereviewdata } = state;
+    return { tradedata,tradereviewdata,tradeconfirmdata,fixedtradedata,fixedtradereviewdata };
 }
 
 const connectedTradeEntry = connect(mapStateToProps)(TradeEntry);

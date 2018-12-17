@@ -5,7 +5,9 @@ export const tradeActions = {
     fetchTradeData,
     fetchTradeReviewData,
     fetchTradeConfirmData,
-    fetchFixedData
+    fetchFixedData,
+    fetchFixedTradeReviewData,
+    fetchFixedTradeConfirmData
 };
 
 function fetchTradeData() {
@@ -42,6 +44,24 @@ function fetchTradeReviewData(bodyFormData){
  
 }
 
+function fetchFixedTradeReviewData(bodyFormData){ 
+    console.log("fetchFixedTradeReviewData")
+    return dispatch => {
+        dispatch(request());
+
+        tradeService.fetchFixedReviewData(bodyFormData)
+            .then(
+                fixedtradereviewdata => dispatch(success(fixedtradereviewdata)),
+                error => dispatch(failure(error))
+            );
+    };
+
+    function request() { return { type: tradeConstants.GETFIXEDTRADEREVIEWDATA_REQUEST } }
+    function success(fixedtradereviewdata) { return { type: tradeConstants.GETFIXEDTRADEREVIEWDATA_SUCCESS, fixedtradereviewdata } }
+    function failure(error) { return { type: tradeConstants.GETFIXEDTRADEREVIEWDATA_FAILURE, error } }
+ 
+}
+
 function fetchTradeConfirmData(bodyFormData){  
     return dispatch => {
         dispatch(request());
@@ -73,4 +93,21 @@ function fetchFixedData() {
     function request() { return { type: tradeConstants.GETFIXEDDATA_REQUEST } }
     function success(fixedtradedata) { return { type: tradeConstants.GETFIXEDDATA_SUCCESS, fixedtradedata } }
     function failure(error) { return { type: tradeConstants.GETFIXEDDATA_FAILURE, error } }
+}
+
+function fetchFixedTradeConfirmData(bodyFormData){  
+    return dispatch => {
+        dispatch(request());
+
+        tradeService.fetchFixedConfirmData(bodyFormData)
+            .then(
+                fixedtradeconfirmdata => dispatch(success(fixedtradeconfirmdata)),
+                error => dispatch(failure(error))
+            );
+    };
+
+    function request() { return { type: tradeConstants.GETFIXEDTRADECONFIRMDATA_REQUEST } }
+    function success(fixedtradeconfirmdata) { return { type: tradeConstants.GETFIXEDTRADECONFIRMDATA_SUCCESS, fixedtradeconfirmdata } }
+    function failure(error) { return { type: tradeConstants.GETFIXEDTRADECONFIRMDATA_FAILURE, error } }
+ 
 }

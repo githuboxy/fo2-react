@@ -5,7 +5,9 @@ export const tradeService = {
     fetchTradeTable,
     fetchReviewData,
     fetchConfirmData,
-    fetchFixedTableData
+    fetchFixedTableData,
+    fetchFixedReviewData,
+    fetchFixedConfirmData
 };
 
  
@@ -39,6 +41,7 @@ function fetchReviewData(bodyFormData) {
     return _tradeReviewData;
 }
 
+
 function fetchConfirmData(bodyFormData) { 
     var user = JSON.parse(localStorage.getItem('user'));
     
@@ -67,4 +70,37 @@ function fetchFixedTableData() {
         _fixedtradeData = fetchHelper.httpFormPost(alertConstants.URL+'/DEALING.do',filtObj);
     }
     return _fixedtradeData;
+}
+
+
+function fetchFixedReviewData(bodyFormData) { 
+    var user = JSON.parse(localStorage.getItem('user'));
+ 
+    let _fixedTradeReviewData;
+      
+    // var pathname = window.location.pathname;
+
+    if(user[0].token !== undefined){
+        bodyFormData.set("token",user[0].token)  
+        bodyFormData.set("clientFirm","81837075");
+        bodyFormData.set("parentProdId","TERM");
+        _fixedTradeReviewData = fetchHelper.httpFormPost(alertConstants.URL+'/TERMDEALING.do',bodyFormData);
+    }
+    return _fixedTradeReviewData;
+}
+
+function fetchFixedConfirmData(bodyFormData) { 
+    var user = JSON.parse(localStorage.getItem('user'));
+    
+    let _fixedtradeConfirmData;
+      
+    // var pathname = window.location.pathname;
+
+    if(user[0].token !== undefined){
+        bodyFormData.set("token",user[0].token)  
+        bodyFormData.set("clientFirm","81837075");
+        bodyFormData.set("parentProdId","TERM");
+        _fixedtradeConfirmData = fetchHelper.httpFormPost(alertConstants.URL+'/INVESTINSERTTRADE.do',bodyFormData);
+    }
+    return _fixedtradeConfirmData;
 }
