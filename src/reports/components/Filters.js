@@ -14,8 +14,7 @@ class Filters extends React.Component {
         
       } 
       componentWillMount(){
-        console.log("componentWillMount")
-        this.doChange();
+        // this.doChange();
       }
       componentWillReceiveProps(){
         if(this.props.data.reportdata !== undefined){            
@@ -59,6 +58,7 @@ class Filters extends React.Component {
       
         const { data } = this.props;
         let filetermarkup; 
+        
         if(data.reportdata !== undefined){            
         filetermarkup = data.reportdata.map((filter,index) => { 
             if(filter.type === "Select"){

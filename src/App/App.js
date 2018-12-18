@@ -9,6 +9,7 @@ import { HomePage } from '../rootindex/pages';
 import { LoginPage } from '../rootindex/pages';
 import { RegisterPage } from '../rootindex/pages';
 import { ReportTemplate } from '../reports/components/ReportTemplate';
+import { ReportMultiTemplates } from '../reports/components/ReportMultiTemplate';
 import { TradeEntry } from '../tradeentry/components/TradeEntry'; 
 
 class App extends React.Component {
@@ -24,6 +25,7 @@ class App extends React.Component {
 
     render() { 
         const { alert } = this.props;
+        
         return (
             
                 <div className="container-fluid"> 
@@ -39,6 +41,7 @@ class App extends React.Component {
                                 <Route path="/register" component={RegisterPage} />
                                 <Route path="/DEALENT" component={TradeEntry} />
                                 <Route path="/report/*" component={ReportTemplate} />
+                                <Route path="/reportM/*" component={ReportMultiTemplates} />
                             </Switch>
                         </Router>
                 </div>

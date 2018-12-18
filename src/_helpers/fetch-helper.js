@@ -29,7 +29,7 @@ function httpPost(url,jsonBody,extraHeaders=null) {
 	   return fetch(url,requestOptions).then(handleResponse);
 }
 
-function httpFormPost(url,jsonBody) {
+function httpFormPost(url,jsonBody) { 
 	return axios({
 		method: 'post',
 		url:url,
@@ -37,6 +37,12 @@ function httpFormPost(url,jsonBody) {
 		config: { headers: {'Content-Type': 'multipart/form-data' }}
 		}).then(handleFormResponse);
 }
+
+function handleFormResponse(response) {
+	 
+		return response.data;
+}
+
 
 function httpPut(url,jsonBody,extraHeaders=null) {
 	   const requestOptions = {
@@ -76,10 +82,7 @@ function handleResponse(response) {
   }); 
   
 }
-function handleFormResponse(response) {
-	
-		return response.data;
-  }
+
 
 
 function login(username,password) {
