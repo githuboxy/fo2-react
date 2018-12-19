@@ -86,7 +86,8 @@ class TradeEntry extends React.Component {
          this.setState({fixed:'fixed'})
       }
 
-      reviewSubmit(){        
+      reviewSubmit(obj){       
+          console.log(obj) 
         this.setState({ tabIndex:2 })
       }
       confirmSubmit(obj){ 

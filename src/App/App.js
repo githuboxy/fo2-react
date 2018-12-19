@@ -11,6 +11,9 @@ import { RegisterPage } from '../rootindex/pages';
 import { ReportTemplate } from '../reports/components/ReportTemplate';
 import { ReportMultiTemplates } from '../reports/components/ReportMultiTemplate';
 import { TradeEntry } from '../tradeentry/components/TradeEntry'; 
+import { TreasuryTemplate } from '../treasurymgmt/components/TreasuryTemplate';
+import { TreasuryEditTemplate } from '../treasurymgmt/components/TreasuryEditTemplate';
+import { TreasuryNewTemplate } from '../treasurymgmt/components/TreasuryNewTemplate';
 
 class App extends React.Component {
     constructor(props) {
@@ -42,6 +45,9 @@ class App extends React.Component {
                                 <Route path="/DEALENT" component={TradeEntry} />
                                 <Route path="/report/*" component={ReportTemplate} />
                                 <Route path="/reportM/*" component={ReportMultiTemplates} />
+                                <Route path="/treasury/*" component={TreasuryTemplate} />
+                                <Route path="/treasuryedit/*" component={TreasuryEditTemplate} />
+                                <Route path="/treasurynew/*" component={TreasuryNewTemplate} />
                             </Switch>
                         </Router>
                 </div>

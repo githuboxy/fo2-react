@@ -8,7 +8,24 @@ class EnterTrade extends React.Component {
         this.doConfirm = this.doConfirm.bind(this); 
     }
     doSubmit(){ 
-		this.props.method() 
+       var arr=[];
+        for(var k in this.props.selectedRows){
+            if(this.refs["tempAmount"+k] !== undefined){
+                if(this.refs["tempAmount"+k].value === ""){
+                alert("Investment Amount is a mandatory field")
+                    return;
+                } 
+            }
+        }
+        for(var k in this.props.selectedRows){
+            if(this.refs["tempAmount"+k] !== undefined){
+                if(this.refs["tempAmount"+k].value !== ""){
+                    arr.push({name:"tempAmount"+k,value:this.refs["tempAmount"+k].value})
+                } 
+            }
+        }
+        
+	 this.props.method(arr) 
     }
     doConfirm(){ 
 		this.props.method2(this.props.selectedRows) 
@@ -158,10 +175,10 @@ class EnterTrade extends React.Component {
                 for(var k in data){
                     arr1.push(data[k])
                 }
-                
+                console.log(arr1)
                 var obj = this.props.selectedRows;
                 var arr = [];
-                
+                 
                 for(var k in obj){
                     arr.push({
                         "rowNumber" : k
@@ -193,7 +210,7 @@ class EnterTrade extends React.Component {
                             })
                         }
                         </select>
-                        <input type="text" name={"tempAmount"+obj.rowNumber.toString()} />
+                        <input type="text" ref={"tempAmount"+obj.rowNumber.toString()} name={"tempAmount"+obj.rowNumber.toString()} />
                         <label>{obj.CurrencyCode} in Cash </label>
                 </div>
                     <div  className="form-group">

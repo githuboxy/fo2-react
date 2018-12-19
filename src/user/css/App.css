@@ -150,3 +150,6 @@ body{
     padding: 5px !important;
     border-right: 1px solid #ccc !important;
   }
+  .btn-primary{
+    margin:2px;
+  }

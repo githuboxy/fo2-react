@@ -35,8 +35,10 @@ class NavBarItem extends React.Component {
                     else{
                         if(link.label === "Treasury Policy Compliance Report")
                             return <li key={link.image.toString()} id={link.image.toString()} ><Link to={"/reportM/"+link.image}> {link.label} </Link> </li>;
+                        else  if(link.label === "Treasury Policy")
+                            return <li key={link.image.toString()} id={link.image.toString()} ><Link to={"/treasury/"+link.image}> {link.label} </Link> </li>;
                         else
-                        return <li key={link.image.toString()} id={link.image.toString()} ><Link to={"/report/"+link.image}> {link.label} </Link> </li>;
+                            return <li key={link.image.toString()} id={link.image.toString()} ><Link to={"/report/"+link.image}> {link.label} </Link> </li>;
                     }
                 }
             });
