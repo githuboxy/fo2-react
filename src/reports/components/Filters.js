@@ -1,6 +1,17 @@
 import React from 'react'; 
 import DatePicker from 'react-datepicker'; 
+import { withStyles } from '@material-ui/core/styles';
 import 'react-datepicker/dist/react-datepicker.css'; 
+import Button from '@material-ui/core/Button';
+import InputLabel from '@material-ui/core/InputLabel';
+import NativeSelect from '@material-ui/core/NativeSelect';
+import TextField from '@material-ui/core/TextField';
+import Grid from '@material-ui/core/Grid';
+const styles = theme => ({
+  margin: {
+    margin: theme.spacing.unit,
+  },
+});
 var dateFormat = require('dateformat');
 class Filters extends React.Component {
     constructor () { 
@@ -11,7 +22,7 @@ class Filters extends React.Component {
         }; 
         this.handleStartDateChange = this.handleStartDateChange.bind(this); 
         this.handleEndDateChange = this.handleEndDateChange.bind(this); 
-        
+       
       } 
       componentWillMount(){
         // this.doChange();
@@ -34,7 +45,7 @@ class Filters extends React.Component {
         this.setState({endDate:date});
      }
      doChange(e){ 
-      
+      console.log(this.refs)
       var filtObj = {};
      if(this.props.data.reportdata !== undefined)      
       for(var i =0; i<this.props.data.reportdata.length; i++){
@@ -55,7 +66,7 @@ class Filters extends React.Component {
      }
       
     render(){ 
-      
+      const { classes } = this.props;
         const { data } = this.props;
         let filetermarkup; 
         
@@ -63,69 +74,68 @@ class Filters extends React.Component {
         filetermarkup = data.reportdata.map((filter,index) => { 
             if(filter.type === "Select"){
              return(    
-              <div className="form-group col-md-2 col-sm-2" key={filter.id.toString()}>
-                   <label> { filter.label } :</label>
-                   <select ref={ filter.name }  name={filter.name} className="form-control input-sm">
-                      {
-                           filter.values.map((obj,index) => { 
-                              return <option key={index} value={obj.id}>{obj.name}</option>
-                          })
-                       } 
-                   </select>
-               </div>
+                <Grid item  key={filter.id.toString()}>
+                  <InputLabel shrink htmlFor="age-native-label-placeholder">
+                    { filter.label } :
+                  </InputLabel> 
+                    <NativeSelect
+                      ref={ filter.name }  name={filter.name}
+                      >
+                        {filter.values.map((obj,index) => { 
+                                return <option key={index} value={obj.id}>{obj.name}</option>
+                            })}
+                      </NativeSelect>
+                </Grid>
                );
             }else if(filter.type === "datepicker"){
                 if(filter.name === "fromDate"){
-                   
-                  
                  return (
-                   <div className="form-group col-md-2 col-sm-2" key={filter.id.toString()}>
-                       <label> { filter.label }:</label>
-                      <DatePicker dateFormat="MMM dd, YYYY" ref={ filter.name } name={filter.name} className="form-control"   selected={this.state.startDate}  onChange={this.handleStartDateChange} />
-                   </div>
+                  <Grid item  key={filter.id.toString()}>
+                       <InputLabel> { filter.label }:</InputLabel>
+                      <TextField type="date" ref={ filter.name } name={filter.name}     selected={this.state.startDate}  onChange={this.handleStartDateChange} />
+                   </Grid>
                  );
                 }else if(filter.name === "toDate"){
-                
                  return (
-                   <div className="form-group col-md-2 col-sm-2" key={filter.id.toString()}>
-                       <label> { filter.label }:</label>
-                      <DatePicker dateFormat="MMM dd, YYYY" ref={ filter.name } name={filter.name} className="form-control"  selected={this.state.endDate}   onChange={this.handleEndDateChange} />
-                   </div>
+                  <Grid item  key={filter.id.toString()}>
+                       <InputLabel> { filter.label }:</InputLabel>
+                      <TextField type="date" ref={ filter.name } name={filter.name}   selected={this.state.endDate}   onChange={this.handleEndDateChange} />
+                   </Grid>
                  );
                 }
               }else if(filter.type === "Button"){
                 return (
-                 <div  className="form-group col-md-2 col-sm-2 mt" key={filter.id.toString()}>
-                      <a title="Go" onClick={(e)=>{this.doChange();}} className="btn btn-primary btn-xs">{ filter.name }</a> 
-                  </div>
+                <Button size="small" variant="outlined" className={classes.margin}  title="Go" onClick={(e)=>{this.doChange();}} key={filter.id.toString()}>
+                  { filter.name }
+                </Button>
                );
               }else if(filter.type === "input"){
                return (
-                 <div  className="form-group col-md-2 col-sm-2" key={filter.id.toString()}>
-                      <label> { filter.label } :</label>
-                     <input ref={filter.name}  defaultValue={filter.name}/>
-                  </div>
+                <Grid item  key={filter.id.toString()}>
+                      <InputLabel> { filter.label } :</InputLabel>
+                     <TextField ref={filter.name}  defaultValue={filter.name}/>
+                  </Grid>
                );      
               }else if(filter.type === "checkbox"){
                return (
-                 <div  className="form-group col-md-2 col-sm-2" key={filter.id.toString()}>
-                      <label> { filter.label } :</label>
-                     <input type="checkbox" ref={filter.name}/>
-                  </div>
+                <Grid item  key={filter.id.toString()}>
+                      <InputLabel> { filter.label } :</InputLabel>
+                     <TextField type="checkbox" ref={filter.name}/>
+                  </Grid>
                );      
               }else if(filter.type === "radio"){
                return (
-                 <div  className="form-group col-md-2 col-sm-2" key={filter.id.toString()}>
-                      <label> { filter.label } :</label>
-                     <input type="radio" ref={filter.name}/>
-                  </div>
+                <Grid item  key={filter.id.toString()}>
+                      <InputLabel> { filter.label } :</InputLabel>
+                     <TextField type="radio" ref={filter.name}/>
+                  </Grid>
                );     
               }else if(filter.type === "textarea"){
                return (
-                 <div  className="form-group col-md-2 col-sm-2" key={filter.id.toString()}>
-                      <label> { filter.label } :</label>
-                     <input type="textarea" className="form-control input-sm" ref={filter.name} />
-                  </div>
+                <Grid item  key={filter.id.toString()}>
+                      <InputLabel> { filter.label } :</InputLabel>
+                     <TextField type="textarea"   ref={filter.name} />
+                  </Grid>
                );      
               }else if(filter.type === "newline"){
                 return  <div key="newline" className="clearfix"></div>        
@@ -134,11 +144,11 @@ class Filters extends React.Component {
     }
  
         return(
-            <div>
+            <Grid container spacing={24} >
                 {filetermarkup}
-            </div>
+            </Grid>
         );
     }
 }
 
-export default Filters;
+export default withStyles(styles)(Filters);

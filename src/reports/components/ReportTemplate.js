@@ -4,14 +4,15 @@ import { Link } from 'react-router-dom';
 import { reportActions } from '../actions/report.actions';
 import { connect } from 'react-redux';
 import Filters from './Filters';
-import ReactTable, { ReactTableDefaults } from "react-table";
-import '../../../node_modules/react-table/react-table.css';  
-import '../../user/css/App.css';
+// import ReactTable, { ReactTableDefaults } from "react-table";
+// import '../../../node_modules/react-table/react-table.css';  
+// import '../../user/css/App.css';
+import MUIDataTable from "mui-datatables";
 import FormData from 'form-data';
-Object.assign(ReactTableDefaults, {
-    defaultPageSize: 5,
-    minRows: 1
-  });
+// Object.assign(ReactTableDefaults, {
+//     defaultPageSize: 5,
+//     minRows: 1
+//   });
 class ReportTemplate extends React.Component {
     constructor(){
         super();
@@ -78,17 +79,21 @@ class ReportTemplate extends React.Component {
                     var s =  item;                     
                     for(var k in s) {
                     
-                        this.state.columns.push({
-                        Header: k,
-                        accessor: k 
-                        });
+                        this.state.columns.push(k);
                 
                     }
                 }
             }); 
            
         }
+        const columns1 = ["Name", "Company", "City", "State"];
 
+        const data1 = [
+         ["Joe James", "Test Corp", "Yonkers", "NY"],
+         ["John Walsh", "Test Corp", "Hartford", "CT"],
+         ["Bob Herm", "Test Corp", "Tampa", "FL"],
+         ["James Houston", "Test Corp", "Dallas", "TX"],
+        ];
         return(
             <div>
                 <NavBar/>
@@ -121,7 +126,9 @@ class ReportTemplate extends React.Component {
                                     <h4 className="panel-title pull-left col-md-1">Search Results</h4>
                                 </div>
                             </div>
-                            <ReactTable resizable={false} noDataText="No Data Found" data={this.state.results} columns={this.state.columns}  className="table table-striped" />
+                            <MUIDataTable  
+                              data={data1} 
+                              columns={columns1}  />
                         </div>
                     </div>
                 </div>
