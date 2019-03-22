@@ -1,0 +1,508 @@
+body{
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif !important;
+    font-size: 12px;
+  }
+  .panel-title{
+      font-size: 12px !important;
+  }
+.actinfo td{text-align: center;}
+.actinfo {border: 1px solid #333;border-radius: 4px;padding: 5px;background: #fff;height: 150px;overflow: hidden;}
+.actinfo .moreopt{
+  position: absolute;
+  top: 130px;
+  text-align: center;
+  font-weight: bold;
+  background-color: #fff;
+  height: 20px;
+  width: 100%;
+}
+/*colvis styles*/
+.dt-buttons{
+            margin-left: 20%;
+            float: right;
+            margin-top: -30px;
+            margin-right: 0px;
+            /* border:1px solid #ddd;
+            border-radius: 2px; */
+        }
+        #example_wrapper .dt-buttons {
+            margin-top: -48px;
+            margin-right: 0px;
+            float: right !important;
+        }
+        #example_wrapper .dt-buttons a{
+            background: #fff;
+            padding: 5px 9px;
+            border-right:1px solid #ddd;
+            border-radius:0;
+            overflow: visible;
+        }
+        #example_wrapper .dt-buttons a:hover{
+            background: #eee;
+        }
+        #example_wrapper .dt-buttons a:last-child{
+            background: #fff;
+            padding: 5px 9px;
+            border-right:0px solid #ddd;
+        }
+
+
+/*example_ex*/
+         #example_ex_wrapper .dt-buttons {
+            margin-top: -39px;
+            margin-right: 0px;
+            float: right !important;
+        }
+        #example_ex_wrapper .dt-buttons a{
+            background: #fff;
+            padding: 5px 9px;
+            border-right:1px solid #ddd;
+            border-radius:0;
+            overflow: visible;
+        }
+        #example_ex_wrapper .dt-buttons a:hover{
+            background: #eee;
+        }
+        #example_ex_wrapper .dt-buttons a:last-child{
+            background: #fff;
+            padding: 5px 9px;
+            border-right:0px solid #ddd;
+        }
+
+         #example_ex1_wrapper .dt-buttons {
+            margin-top: -39px;
+            margin-right: 0px;
+            float: right !important;
+        }
+        #example_ex1_wrapper .dt-buttons a{
+            background: #fff;
+            padding: 5px 9px;
+            border-right:1px solid #ddd;
+            border-radius:0;
+            overflow: visible;
+        }
+        #example_ex1_wrapper .dt-buttons a:hover{
+            background: #eee;
+        }
+        #example_ex1_wrapper .dt-buttons a:last-child{
+            background: #fff;
+            padding: 5px 9px;
+            border-right:0px solid #ddd;
+        }
+
+        /**/
+        #example_ex2_wrapper .dt-buttons {
+            margin-top: -39px;
+            margin-right: 0px;
+            float: right !important;
+        }
+        #example_ex2_wrapper .dt-buttons a{
+            background: #fff;
+            padding: 5px 9px;
+            border-right:1px solid #ddd;
+            border-radius:0;
+            overflow: visible;
+        }
+        #example_ex2_wrapper .dt-buttons a:hover{
+            background: #eee;
+        }
+        #example_ex2_wrapper .dt-buttons a:last-child{
+            background: #fff;
+            padding: 5px 9px;
+            border-right:0px solid #ddd;
+        }
+
+         /**/
+        #example_ex3_wrapper .dt-buttons {
+            margin-top: -39px;
+            margin-right: 0px;
+            float: right !important;
+        }
+        #example_ex3_wrapper .dt-buttons a{
+            background: #fff;
+            padding: 5px 9px;
+            border-right:1px solid #ddd;
+            border-radius:0;
+            overflow: visible;
+        }
+        #example_ex3_wrapper .dt-buttons a:hover{
+            background: #eee;
+        }
+        #example_ex3_wrapper .dt-buttons a:last-child{
+            background: #fff;
+            padding: 5px 9px;
+            border-right:0px solid #ddd;
+        }
+
+	 /**/
+        #example_ex6_wrapper .dt-buttons {
+            margin-top: -39px;
+            margin-right: 0px;
+            float: right !important;
+        }
+        #example_ex6_wrapper .dt-buttons a{
+            background: #fff;
+            padding: 5px 9px;
+            border-right:1px solid #ddd;
+            border-radius:0;
+            overflow: visible;
+        }
+        #example_ex6_wrapper .dt-buttons a:hover{
+            background: #eee;
+        }
+        #example_ex6_wrapper .dt-buttons a:last-child{
+            background: #fff;
+            padding: 5px 9px;
+            border-right:0px solid #ddd;
+        }
+         /**/
+        #example_ex4_wrapper .dt-buttons {
+            margin-top: -39px;
+            margin-right: 0px;
+            float: right !important;
+        }
+        #example_ex4_wrapper .dt-buttons a{
+            background: #fff;
+            padding: 5px 9px;
+            border-right:1px solid #ddd;
+            border-radius:0;
+            overflow: visible;
+        }
+        #example_ex4_wrapper .dt-buttons a:hover{
+            background: #eee;
+        }
+        #example_ex4_wrapper .dt-buttons a:last-child{
+            background: #fff;
+            padding: 5px 9px;
+            border-right:0px solid #ddd;
+        }
+
+         /**/
+        #example_ex5_wrapper .dt-buttons {
+            margin-top: -39px;
+            margin-right: 0px;
+            float: right !important;
+        }
+        #example_ex5_wrapper .dt-buttons a{
+            background: #fff;
+            padding: 5px 9px;
+            border-right:1px solid #ddd;
+            border-radius:0;
+            overflow: visible;
+        }
+        #example_ex5_wrapper .dt-buttons a:hover{
+            background: #eee;
+        }
+        #example_ex5_wrapper .dt-buttons a:last-child{
+            background: #fff;
+            padding: 5px 9px;
+            border-right:0px solid #ddd;
+        }
+
+
+
+        button.dt-button, div.dt-button, a.dt-button {border:0;}
+        button:not(.disabled).dt-button:focus, div:not(.disabled).dt-button:focus, a:not(.disabled).dt-button:focus {
+            border: 0;
+            border-radius: 0;
+        }
+        button:not(.disabled).dt-button:hover, div:not(.disabled).dt-button:hover, a:not(.disabled).dt-button:hover {
+            border: 0;
+            border-radius: 0;
+        }
+        #example1_wrapper .dt-buttons{
+            margin-top: 0px;
+            margin-right: 0px;
+            /*float: right !important;*/
+        }
+        #example1_wrapper .dt-buttons{
+            margin-left: 39%;
+            float: right;
+        }
+        #example1_wrapper .dt-buttons a:last-child{
+          border-right: 1px solid #999;
+
+        }
+
+        div.dt-button-collection{
+           width: auto !important;
+            max-height: 300px;
+            overflow: auto !important;
+
+        }
+
+        div.dt-button-collection .dt-button{
+            background: none !important;
+            border:none !important;
+            box-shadow: none !important;
+        }
+        .dt-button-collection a.buttons-columnVisibility:before,
+        .dt-button-collection a.buttons-columnVisibility.active span:before {
+            display:block;
+            position:absolute;
+            top:1.2em;
+            left:0;
+            width:12px;
+            height:12px;
+            box-sizing:border-box;
+
+        }
+
+        .dt-button-collection a.buttons-columnVisibility:before {
+            content:' ';
+            margin-top:-6px;
+            margin-left:10px;
+            border:1px solid black;
+            border-radius:3px;
+        }
+
+        .dt-button-collection a.buttons-columnVisibility.active span:before {
+            content:'\2714';
+            margin-top:-11px;
+            margin-left:12px;
+            text-align:center;
+            text-shadow:1px 1px #DDD, -1px -1px #DDD, 1px -1px #DDD, -1px 1px #DDD;
+        }
+
+        .dt-button-collection a.buttons-columnVisibility span {
+            margin-left:20px;
+        }
+        #example_length {float: left;}
+      /*end colvis*/
+.bs-example{
+  margin: 20px;
+}
+.lots-of-text{
+    display: none;
+}
+ .modal {
+  text-align: center;
+  padding: 0!important;
+}
+
+.modal:before {
+  content: '';
+  display: inline-block;
+  height: 100%;
+  vertical-align: middle;
+  margin-right: -4px;
+}
+
+.modal-dialog {
+  display: inline-block;
+  text-align: left;
+  vertical-align: middle;
+}
+.alert{
+  padding:5px !important;
+  margin-bottom: 5px;
+}
+.btn-success{
+  color:#000;
+}
+body{
+  font-size: 12px;
+}
+#myModal .modal-dialog {
+  /*width: 1300px;*/
+}
+.table th{
+  white-space: nowrap;
+}
+.bgcolor{
+  background-color: #4E8FCC !important
+}
+.fontcolor{
+  color: #fff;
+}
+/* enable absolute positioning */
+.inner-addon {
+  position: relative;
+}
+
+/* style glyph */
+.inner-addon .glyphicon {
+  position: absolute;
+  padding: 10px;
+  pointer-events: none;
+}
+
+/* align glyph */
+.left-addon .glyphicon  { left:  0px;}
+.right-addon .glyphicon { right: 0px;}
+
+/* add padding  */
+.left-addon input  { padding-left:  30px; }
+.right-addon input { padding-right: 30px; }
+
+.searchbox{
+   padding: 11px 0px 0px 0px;
+   margin-bottom: 10px;
+   width: 50%;
+   margin-left: 1px;
+   border-radius: 5px;
+   /*border:1px solid #ccc;*/
+}
+.bordershadow{
+  -webkit-box-shadow: 2px 4px 8px -2px rgba(0,0,0,0.61);
+-moz-box-shadow: 2px 4px 8px -2px rgba(0,0,0,0.61);
+box-shadow: 2px 4px 8px -2px rgba(0,0,0,0.61);
+}
+.mgbottom{
+  margin-bottom: 8px !important;
+}
+/* table.dataTable thead tr{
+  color: #fff;
+  background: rgba(0,0,0,1);
+background: -moz-linear-gradient(top, rgba(0,0,0,1) 0%, rgba(44,44,44,1) 0%, rgba(28,28,28,1) 0%, rgba(17,17,17,1) 0%, rgba(71,71,71,1) 0%, rgba(19,19,19,1) 0%, rgba(102,102,102,1) 0%, rgba(89,89,89,1) 0%, rgba(76,76,76,1) 100%);
+background: -webkit-gradient(left top, left bottom, color-stop(0%, rgba(0,0,0,1)), color-stop(0%, rgba(44,44,44,1)), color-stop(0%, rgba(28,28,28,1)), color-stop(0%, rgba(17,17,17,1)), color-stop(0%, rgba(71,71,71,1)), color-stop(0%, rgba(19,19,19,1)), color-stop(0%, rgba(102,102,102,1)), color-stop(0%, rgba(89,89,89,1)), color-stop(100%, rgba(76,76,76,1)));
+background: -webkit-linear-gradient(top, rgba(0,0,0,1) 0%, rgba(44,44,44,1) 0%, rgba(28,28,28,1) 0%, rgba(17,17,17,1) 0%, rgba(71,71,71,1) 0%, rgba(19,19,19,1) 0%, rgba(102,102,102,1) 0%, rgba(89,89,89,1) 0%, rgba(76,76,76,1) 100%);
+background: -o-linear-gradient(top, rgba(0,0,0,1) 0%, rgba(44,44,44,1) 0%, rgba(28,28,28,1) 0%, rgba(17,17,17,1) 0%, rgba(71,71,71,1) 0%, rgba(19,19,19,1) 0%, rgba(102,102,102,1) 0%, rgba(89,89,89,1) 0%, rgba(76,76,76,1) 100%);
+background: -ms-linear-gradient(top, rgba(0,0,0,1) 0%, rgba(44,44,44,1) 0%, rgba(28,28,28,1) 0%, rgba(17,17,17,1) 0%, rgba(71,71,71,1) 0%, rgba(19,19,19,1) 0%, rgba(102,102,102,1) 0%, rgba(89,89,89,1) 0%, rgba(76,76,76,1) 100%);
+background: linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(44,44,44,1) 0%, rgba(28,28,28,1) 0%, rgba(17,17,17,1) 0%, rgba(71,71,71,1) 0%, rgba(19,19,19,1) 0%, rgba(102,102,102,1) 0%, rgba(89,89,89,1) 0%, rgba(76,76,76,1) 100%);
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#000000', endColorstr='#4c4c4c', GradientType=0 );
+}
+table.dataTable thead th, table.dataTable tbody td{
+  white-space: nowrap;
+  padding: 2px 4px;
+}
+.table-striped>tbody>tr:nth-of-type(odd){
+  background-color: #E7E7E7;
+} */
+ul {
+  padding: 0;
+  margin: 0;
+}
+/*ul  li{
+   display: inline;
+}*/
+/* .dataTables_scroll{
+  border: 1px solid #333;
+} */
+.dataTables_scrollBody{
+  max-height: 300px !important;
+}
+
+button.dt-button, div.dt-button, a.dt-button{
+  margin-right: 0px !important;
+  border-right: none;
+}
+#showexpand1{  padding-left: 11px;  padding-right: 14px; }
+#showexpand2{  padding-left: 11px;  padding-right: 14px; }
+#showexpand3{  padding-left: 11px;  padding-right: 14px; }
+#showexpand4{  padding-left: 11px;  padding-right: 14px; }
+#showexpand5{  padding-left: 11px;  padding-right: 14px; }
+
+.innerrow{
+  margin-left: 10px;
+  padding: 5px;
+  font-weight: bold;
+
+  text-align: right;
+}
+.div1, .div2{
+  display: inline-block;
+}
+.div1{
+  background-color: #ccc;
+  width: 40%;
+}
+.div2{
+  margin-left: -4px;
+  width: 60%;
+  background-color: #e7e7e7;
+}
+.div2 .innerrow{
+  background-color: none;
+  font-weight: normal;
+  margin-left: -3px;
+  text-align: left;
+  width: 60%;
+}
+.pagination {margin:0;margin-top: -5px;margin-left: 5px;}
+.pagination > li > a, .pagination > li > span{
+  padding: 5px 9px;
+}
+li.excel a {color: #00FF00;}
+li.pdf a{color: #FF0000;}
+li.justify a {color: #333;}
+li.excel:hover a{color: #00FF00;}
+li.pdf:hover a{color: #FF0000;}
+li.justify:hover a {color: #333;}
+.fa {font-size: 14px;}
+span.fa {font-size: 19px;}
+.drpdwn {background: #fff;border: 1px solid #adadad;border-radius:4px;padding:5px 0;font-size: 14px;margin: 2px 0;z-index: 9999;}
+.drpdwn li {list-style-type: none; display: block;padding:3px 15px;white-space: nowrap;}
+.drpdwn li a{color: #262626;}
+.drpdwn li a:hover {color: #262626;text-decoration: none;}
+.drpdwn li:hover {background: #f5f5f5;}
+
+.tbldrpdwn {background: #fff;border: 1px solid #adadad;border-radius:4px;padding:5px 0;font-size: 14px;margin: 2px 0;z-index: 9999;}
+.tbldrpdwn li {list-style-type: none; display: block;padding:3px 15px;white-space: nowrap;}
+.tbldrpdwn li a{color: #262626;}
+.tbldrpdwn li a:hover {color: #262626;text-decoration: none;}
+.tbldrpdwn li:hover {background: #f5f5f5;}
+
+.tblsubdrpdwn {padding:10px;background: #fff;border: 1px solid #adadad;border-radius:4px;font-size: 14px;margin: 2px 0;z-index: 9999;}
+
+
+.tabledrpbtn .fa{
+   padding: 4px 6px;
+   font-size: 14px;
+   background: rgba(214,232,205,1);
+background: -moz-linear-gradient(top, rgba(214,232,205,1) 0%, rgba(255,255,255,1) 100%);
+background: -webkit-gradient(left top, left bottom, color-stop(0%, rgba(214,232,205,1)), color-stop(100%, rgba(255,255,255,1)));
+background: -webkit-linear-gradient(top, rgba(214,232,205,1) 0%, rgba(255,255,255,1) 100%);
+background: -o-linear-gradient(top, rgba(214,232,205,1) 0%, rgba(255,255,255,1) 100%);
+background: -ms-linear-gradient(top, rgba(214,232,205,1) 0%, rgba(255,255,255,1) 100%);
+background: linear-gradient(to bottom, rgba(214,232,205,1) 0%, rgba(255,255,255,1) 100%);
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#d6e8cd', endColorstr='#ffffff', GradientType=0 );
+/*border: 1px solid #6ba851;*/
+}
+
+table#example tbody tr td:nth-child(6){
+  text-align: right;
+}
+
+.modal-body .modal-header{
+  padding: 2px;
+}
+.modal-body .modal-header > h4{
+  font-size: 15px;
+}
+.dataGridmodal{
+  width: 100%;
+  overflow: auto;
+  border:1px solid #333;
+}
+.actcount img{
+	background-color: #f0ad4e;
+    border-radius: 10px;
+}.dt-buttons .excel {color: #00FF00;}
+.dt-buttons .pdf {color: #FF0000;}
+.dt-buttons .justify {color: #333;}
+.dt-buttons .print {color: #337ab7;}
+.dt-buttons .excel:hover {color: #00FF00;}
+.dt-buttons .pdf:hover {color: #FF0000;}
+.dt-buttons .justify:hover {color: #333;}
+
+
+/*.nav-tabs>li.active>a, .nav-tabs>li.active > a{
+  background-color: #ccc !important;
+  font-weight: bold !important;
+}*/
+
+.divOdd{
+  background-color: #e7e7e7;
+}
+.ml0{
+        margin-left: 0px !important;
+        padding-left: 0px !important;
+  }
+  .mt10{
+      margin-top: 5px !important;
+      margin-bottom: 5px !important;
+  }
+  .navbar-nav>li{
+      border-right: 1px solid #ccc;
+  }

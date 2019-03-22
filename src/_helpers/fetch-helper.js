@@ -1,10 +1,11 @@
 import { authHeader } from  './auth-header';
-
-
-
+import { alertConstants } from '../common/constants/alert.constants';
+import axios from 'axios'; 
+import FormData from 'form-data';
 export const fetchHelper = {
 		httpGet,
 		httpPost,
+		httpFormPost,
 		httpPut,
 		httpDelete,
 		logout,
@@ -28,14 +29,30 @@ function httpPost(url,jsonBody,extraHeaders=null) {
 	   return fetch(url,requestOptions).then(handleResponse);
 }
 
+function httpFormPost(url,jsonBody) { 
+	return axios({
+		method: 'post',
+		url:url,
+		data: jsonBody,
+		config: { headers: {'Content-Type': 'multipart/form-data' }}
+		}).then(handleFormResponse);
+}
+
+function handleFormResponse(response) {
+	 
+		return response.data;
+}
+
 
 function httpPut(url,jsonBody,extraHeaders=null) {
 	   const requestOptions = {
 	        method: 'PUT',
 	        headers: { ...authHeader(),...extraHeaders,'Content-Type': 'application/json' },
 	        body: JSON.stringify(jsonBody)
-	    };
-	   return fetch(url,requestOptions).then(handleResponse);
+		};
+		
+
+	  return fetch(url,requestOptions).then(handleResponse);
 }
 
 function httpDelete(url,extraHeaders=null) {
@@ -47,7 +64,7 @@ function httpDelete(url,extraHeaders=null) {
 	    return fetch(url,requestOptions).then(handleResponse);
 }
 
-function handleResponse(response) {
+function handleResponse(response) {  
   return response.text().then(text => {
       const data = text && JSON.parse(text);
       if (!response.ok) {
@@ -67,13 +84,18 @@ function handleResponse(response) {
 }
 
 
+
 function login(username,password) {
-	return  fetchHelper.httpPost('http://localhost:8081/login', 
-	    	{ 'email':username, 'password':password}).then(user => {
-	        // login successful if there's a jwt token in the response
-	        if (user.token) {
+	var loginDetails = new FormData();
+	loginDetails.set("loginName",username)
+	loginDetails.set("noOneKnows",password)
+	return  fetchHelper.httpFormPost(alertConstants.URL+'/reactjs/reactJSUtil.jsp?actionFlag=VALIDATE_LOGIN', 
+	loginDetails).then(user => {
+			// login successful if there's a jwt token in the response
+		 
+	        if (user[0].token) {
 	            // store user details and jwt token in local storage to keep user logged in between page refreshes
-	            localStorage.setItem('user', JSON.stringify(user));
+				localStorage.setItem('user', JSON.stringify(user));
 	        }
 
 	        return user;

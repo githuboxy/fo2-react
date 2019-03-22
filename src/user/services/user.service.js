@@ -14,8 +14,7 @@ function login(username, password) {
 	return fetchHelper.login(username, password);
 }
 
-function getAll() {
-    console.log("12345")
+function getAll() { 
     let _getAll = fetchHelper.httpGet('http://localhost:8081/users');
     
     return _getAll;

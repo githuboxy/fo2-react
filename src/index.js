@@ -5,8 +5,7 @@ import { Provider } from 'react-redux';
 import { store } from './_helpers';
 import { App } from './App';
 
-
-console.log('Hey guys and ladies!!')
+ 
 
 render(
     <Provider store={store}>

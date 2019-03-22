@@ -1,56 +1,32 @@
 import React from 'react';
+import '../css/App.css'; 
+import '../css/index.css';
+import '../css/custom.css';
+import '../css/layout.css'; 
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { NavBar } from '../../navbar/components/navbar';
-
 import { userActions } from '../actions/user.actions';
-
-
+ 
 
 class HomePage extends React.Component {
     componentDidMount() {
-        this.props.dispatch(userActions.getAll()); 
-        
+        // this.props.dispatch(userActions.getAll()); 
     }
-
     handleDeleteUser(id) {
         return (e) => this.props.dispatch(userActions.delete(id));
     }
-
-    render() {
-         console.log(this.props)
+    render() { 
         const { user, users } = this.props;
         return (
-             
             <div>
-                <NavBar />
-            <div className="col-md-6 col-md-offset-3">
-                <h1>Hi {user.firstName}!</h1>
-                <p>You're logged in with React!!</p>
-                <h3>All registered users:</h3>
-                {users.loading && <em>Loading users...</em>}
-                {users.error && <span className="text-danger">ERROR: {users.error}</span>}
-                {users.items &&
-                    <ul>
-                        {users.items.map((user, index) =>
-                            <li key={user.id}>
-                                {user.firstName + ' ' + user.lastName}
-                                {
-                                    user.deleting ? <em> - Deleting...</em>
-                                    : user.deleteError ? <span className="text-danger"> - ERROR: {user.deleteError}</span>
-                                    : <span> - <a onClick={this.handleDeleteUser(user.id)}>Delete</a></span>
-                                }
-                            </li>
-                        )}
-                    </ul>
-                }
-
-                <p>
-                    <Link to="/login">Logout</Link>
-                </p>
+                <NavBar/>
+                <div className="pull-right btn btn-danger">
+                    <Link to="/login" style={{color:'#fff'}}>Logout</Link>
+                </div>
+                <div className="clearfix"></div>
+                <h1>Home Page</h1>
             </div>
-            </div>
-          
         );
     }
 }
@@ -63,7 +39,6 @@ function mapStateToProps(state) {
         users 
     };
 }
- 
  
 const connectedHomePage = connect(mapStateToProps)(HomePage);
 export { connectedHomePage as HomePage };

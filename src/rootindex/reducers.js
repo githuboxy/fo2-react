@@ -5,13 +5,23 @@ import { registration } from '../user/reducers/registration.reducer';
 import { users } from '../user/reducers/users.reducer';
 import { navlinks } from '../navbar/reducers/navbar.reducer';
 import { alert } from '../common/reducers/alert.reducer';
-
+import { reportdata,reportdatatable } from '../reports/reducers/report.reducer';
+import { tradedata,tradereviewdata,tradeconfirmdata,fixedtradedata,fixedtradereviewdata,fixedtradeconfirmdata } from '../tradeentry/reducers/trade.reducer';
+ 
 const rootReducer = combineReducers({
   authentication,
   registration,
   users,
   navlinks,
-  alert
+  alert,
+  reportdata,
+  reportdatatable,
+  tradedata,
+  tradereviewdata,
+  tradeconfirmdata,
+  fixedtradedata,
+  fixedtradereviewdata,
+  fixedtradeconfirmdata
 });
 
 export default rootReducer;
